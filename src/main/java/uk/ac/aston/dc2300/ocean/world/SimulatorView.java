@@ -1,4 +1,4 @@
-package uk.ac.aston.dc2300.ocean.world;
+package main.java.uk.ac.aston.dc2300.ocean.world;
 
 import java.awt.*;
 import java.awt.event.*;
