@@ -1,11 +1,11 @@
-package main.java.uk.ac.aston.dc2300.ocean.world;
+package uk.ac.aston.dc2300.ocean.world;
 
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random;
 
-import main.java.uk.ac.aston.dc2300.ocean.life.Creature;
+import uk.ac.aston.dc2300.ocean.life.Creature;
 
 /**
  * Represent a rectangular grid of field positions.

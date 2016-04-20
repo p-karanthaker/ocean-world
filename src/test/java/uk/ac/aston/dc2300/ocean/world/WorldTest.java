@@ -1,4 +1,4 @@
-package test.java.uk.ac.aston.dc2300.ocean.world;
+package uk.ac.aston.dc2300.ocean.world;
 
 import static org.junit.Assert.*;
 
