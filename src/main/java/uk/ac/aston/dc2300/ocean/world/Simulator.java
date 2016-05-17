@@ -14,13 +14,13 @@ public class Simulator {
 	private static SimulatorView view;
 	
 	public static void main(String[] args) {
-		Simulator sim = new Simulator(new Dimension(50, 50));
+		Simulator sim = new Simulator(ModelConstants.OCEAN_WIDTH, ModelConstants.OCEAN_DEPTH);
 		
 		sim.startSimulation();
 	}
 	
-	public Simulator(Dimension fieldDimension) {
-		field = new Field(fieldDimension.height, fieldDimension.width);
+	public Simulator(int width, int depth) {
+		field = new Field(ModelConstants.OCEAN_WIDTH, ModelConstants.OCEAN_DEPTH);
 		
 		view = new SimulatorView(50, 50);
 		view.setColor(Plankton.class, Color.GREEN);
