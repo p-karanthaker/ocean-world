@@ -29,13 +29,13 @@ public class Simulator {
 	}
 	
 	public void populate() {
-		Creature plankton = new Plankton(100, 0, 4, 0.7f, 0.8f, new Location(10, 10));
-		Creature sardine = new Sardine(75, 12, 14, 0.1f, 0.5f, new Location(20, 20));
-		Creature shark = new Shark(150, 25, 0, 0.05f, 0.2f, new Location(30, 30));
+		Creature plankton = new Plankton(100, 0, 4, 0.7f, 0.8f);
+		Creature sardine = new Sardine(75, 12, 14, 0.1f, 0.5f);
+		Creature shark = new Shark(150, 25, 0, 0.05f, 0.2f);
 		field.clear();
-		field.place(plankton, plankton.getLocation());
-		field.place(sardine, sardine.getLocation());
-		field.place(shark, shark.getLocation());
+		field.place(plankton, new Location(10, 10));
+		field.place(sardine, new Location(20, 20));
+		field.place(shark, new Location(30, 30));
 	}
 	
 	public void startSimulation() {
