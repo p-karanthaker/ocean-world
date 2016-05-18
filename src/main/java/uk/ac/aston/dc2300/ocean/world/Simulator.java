@@ -2,7 +2,6 @@ package uk.ac.aston.dc2300.ocean.world;
 
 import java.awt.Color;
 import java.util.Random;
-import sun.org.mozilla.javascript.internal.Token;
 
 import uk.ac.aston.dc2300.ocean.life.Plankton;
 import uk.ac.aston.dc2300.ocean.life.Sardine;
