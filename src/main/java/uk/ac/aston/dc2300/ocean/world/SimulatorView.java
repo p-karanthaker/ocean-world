@@ -194,7 +194,6 @@ public class SimulatorView extends JFrame
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				Simulator.startSimulation();
 			}
 		});
         

@@ -12,39 +12,27 @@ public class Simulator {
 
 	private static Field field;
 	private static SimulatorView view;
-	private static Simulator sim;
 	
 	public static void main(String[] args) {
-		startSimulation();
-	}
-	
-	public Simulator() {
-		// TODO Auto-generated constructor stub
+		Simulator sim = new Simulator(ModelConstants.OCEAN_WIDTH, ModelConstants.OCEAN_DEPTH);
+		
+		sim.startSimulation();
 	}
 	
 	public Simulator(int width, int depth) {
 		field = new Field(ModelConstants.OCEAN_WIDTH, ModelConstants.OCEAN_DEPTH);
-<<<<<<< HEAD
-		
-		view = new SimulatorView(ModelConstants.OCEAN_WIDTH, ModelConstants.OCEAN_DEPTH);
-=======
 
 		view = new SimulatorView(50, 50);
->>>>>>> refs/remotes/origin/dev
 		view.setColor(Plankton.class, Color.GREEN);
 		view.setColor(Sardine.class, Color.DARK_GRAY);
 		view.setColor(Shark.class, Color.CYAN);
 	}
 	
-<<<<<<< HEAD
-	public static void populate() {
-=======
 	public void populate() {
                 //Holds the value of the specides chosen randomly
                 Species decicedCreature;
                 RandomGenerator.initialiseWithSeed(ModelConstants.RNG_SEED);
                 Random rand = RandomGenerator.getRandom();
->>>>>>> refs/remotes/origin/dev
 		field.clear();
                 
                 
@@ -78,8 +66,7 @@ public class Simulator {
             }
         }
 	
-	public static void startSimulation() {
-		sim = new Simulator(ModelConstants.OCEAN_WIDTH, ModelConstants.OCEAN_DEPTH);
+	public void startSimulation() {
 		populate();
 		view.showStatus(0, field);
 	}
