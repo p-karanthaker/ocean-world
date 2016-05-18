@@ -6,9 +6,8 @@ public class Fish extends Creature {
 
 	private int foodLevel;
 	
-	public Fish(int maxAge, int minBreedingAge, int nutritionalValue, float creationOdds, float breedingOdds,
-			Location initialLocation) {
-		super(maxAge, minBreedingAge, nutritionalValue, creationOdds, breedingOdds, initialLocation);
+	public Fish(int maxAge, int minBreedingAge, int nutritionalValue, float creationOdds, float breedingOdds) {
+		super(maxAge, minBreedingAge, nutritionalValue, creationOdds, breedingOdds);
 		// TODO Auto-generated constructor stub
 	}
 	

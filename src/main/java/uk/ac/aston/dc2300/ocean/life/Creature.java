@@ -21,14 +21,13 @@ public class Creature {
 	private Location location;
 	
 	public Creature(int maxAge, int minBreedingAge, int nutritionalValue, 
-			float creationOdds, float breedingOdds, Location initialLocation) {
+			float creationOdds, float breedingOdds) {
 		this.MAX_AGE = maxAge;
 		this.MIN_BREEDING_AGE = minBreedingAge;
 		this.NUTRITIONAL_VALUE = nutritionalValue;
 		this.CREATION_ODDS = creationOdds;
 		this.BREEDING_ODDS = breedingOdds;
 		this.age = 0;
-		this.location = initialLocation;
 	}
 	
 	public void reproduce() {

@@ -4,9 +4,8 @@ import uk.ac.aston.dc2300.ocean.world.Location;
 
 public class Sardine extends Fish {
 
-	public Sardine(int maxAge, int minBreedingAge, int nutritionalValue, float creationOdds, float breedingOdds,
-			Location initialLocation) {
-		super(maxAge, minBreedingAge, nutritionalValue, creationOdds, breedingOdds, initialLocation);
+	public Sardine(int maxAge, int minBreedingAge, int nutritionalValue, float creationOdds, float breedingOdds) {
+		super(maxAge, minBreedingAge, nutritionalValue, creationOdds, breedingOdds);
 	}
 
 	@Override
