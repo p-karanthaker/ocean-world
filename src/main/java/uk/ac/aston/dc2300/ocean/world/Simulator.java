@@ -49,6 +49,7 @@ public class Simulator {
                 }
 	}
         
+        //Decides what type of creature needs to be created
         private Species creationDecider(int randomNumber)
         {
             if(0 <= randomNumber && randomNumber <= 69){
