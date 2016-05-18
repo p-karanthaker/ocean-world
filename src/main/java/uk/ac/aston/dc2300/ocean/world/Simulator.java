@@ -31,9 +31,10 @@ public class Simulator {
 	public void populate() {
                 //Holds the value of the specides chosen randomly
                 Species decicedCreature;
-                
+                RandomGenerator.initialiseWithSeed(ModelConstants.RNG_SEED);
                 Random rand = RandomGenerator.getRandom();
 		field.clear();
+                
                 
                 //Cycle through all locations in the field
                 for(int d = 0; d < field.getDepth(); d++){

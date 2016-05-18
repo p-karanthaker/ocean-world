@@ -5,7 +5,7 @@ import java.util.Random;
 
 class RandomGenerator {
 	private static Random random=null;   
-	private static int seed= ModelConstants.RNG_SEED;
+	private static int seed= 27;
 
 	public static void initialiseWithSeed(int s){
 		seed = s;
