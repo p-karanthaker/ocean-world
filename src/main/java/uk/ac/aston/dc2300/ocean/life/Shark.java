@@ -1,11 +1,9 @@
 package uk.ac.aston.dc2300.ocean.life;
 
-import uk.ac.aston.dc2300.ocean.world.Location;
-
 public class Shark extends Fish {
 
-	public Shark(int maxAge, int minBreedingAge, int nutritionalValue, float creationOdds, float breedingOdds) {
-		super(maxAge, minBreedingAge, nutritionalValue, creationOdds, breedingOdds);
+	public Shark() {
+		super(Species.SHARK);
 	}
 
 	@Override
