@@ -11,30 +11,34 @@ public class Simulator {
 
 	private static Field field;
 	private static SimulatorView view;
+	private static Simulator sim;
 	
 	public static void main(String[] args) {
-		Simulator sim = new Simulator(ModelConstants.OCEAN_WIDTH, ModelConstants.OCEAN_DEPTH);
-		
-		sim.startSimulation();
+		startSimulation();
+	}
+	
+	public Simulator() {
+		// TODO Auto-generated constructor stub
 	}
 	
 	public Simulator(int width, int depth) {
 		field = new Field(ModelConstants.OCEAN_WIDTH, ModelConstants.OCEAN_DEPTH);
 		
-		view = new SimulatorView(50, 50);
+		view = new SimulatorView(ModelConstants.OCEAN_WIDTH, ModelConstants.OCEAN_DEPTH);
 		view.setColor(Plankton.class, Color.GREEN);
 		view.setColor(Sardine.class, Color.DARK_GRAY);
 		view.setColor(Shark.class, Color.CYAN);
 	}
 	
-	public void populate() {
+	public static void populate() {
 		field.clear();
 		field.place(CreatureFactory.getCreature(Species.PLANKTON), new Location(10, 10));
 		field.place(CreatureFactory.getCreature(Species.SARDINE), new Location(20, 20));
 		field.place(CreatureFactory.getCreature(Species.SHARK), new Location(30, 30));
 	}
 	
-	public void startSimulation() {
+	public static void startSimulation() {
+		sim = new Simulator(ModelConstants.OCEAN_WIDTH, ModelConstants.OCEAN_DEPTH);
 		populate();
 		view.showStatus(0, field);
 	}
