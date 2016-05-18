@@ -10,7 +10,7 @@ import uk.ac.aston.dc2300.ocean.life.*;
  *
  * @author OEDWARDS
  */
-public class CreatureFactory {
+abstract public class CreatureFactory {
     
     public static Creature getCreature(Species species){
     	switch (species) {
