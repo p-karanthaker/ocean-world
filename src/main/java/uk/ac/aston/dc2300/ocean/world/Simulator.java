@@ -1,7 +1,6 @@
 package uk.ac.aston.dc2300.ocean.world;
 
 import java.awt.Color;
-import java.awt.Dimension;
 
 import uk.ac.aston.dc2300.ocean.life.Creature;
 import uk.ac.aston.dc2300.ocean.life.Plankton;
@@ -29,9 +28,9 @@ public class Simulator {
 	}
 	
 	public void populate() {
-		Creature plankton = new Plankton(100, 0, 4, 0.7f, 0.8f);
-		Creature sardine = new Sardine(75, 12, 14, 0.1f, 0.5f);
-		Creature shark = new Shark(150, 25, 0, 0.05f, 0.2f);
+		Creature plankton = new Plankton();
+		Creature sardine = new Sardine();
+		Creature shark = new Shark();
 		field.clear();
 		field.place(plankton, new Location(10, 10));
 		field.place(sardine, new Location(20, 20));
