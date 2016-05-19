@@ -3,7 +3,6 @@ package uk.ac.aston.dc2300.ocean.world;
 import java.awt.Color;
 import java.util.Random;
 
-import uk.ac.aston.dc2300.ocean.gui.SimulatorView;
 import uk.ac.aston.dc2300.ocean.life.Plankton;
 import uk.ac.aston.dc2300.ocean.life.Sardine;
 import uk.ac.aston.dc2300.ocean.life.Shark;
