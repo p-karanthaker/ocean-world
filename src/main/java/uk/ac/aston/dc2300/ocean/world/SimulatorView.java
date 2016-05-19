@@ -1,14 +1,8 @@
-package uk.ac.aston.dc2300.ocean.gui;
+package uk.ac.aston.dc2300.ocean.world;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-
-import uk.ac.aston.dc2300.ocean.world.Field;
-import uk.ac.aston.dc2300.ocean.world.FieldStats;
-import uk.ac.aston.dc2300.ocean.world.ModelConstants;
-import uk.ac.aston.dc2300.ocean.world.Simulator;
-
 import java.util.HashMap;
 
 /**
@@ -191,7 +185,6 @@ public class SimulatorView extends JFrame
 				// Set some dummy constants
 				ModelConstants.OCEAN_WIDTH = 50;
 				ModelConstants.OCEAN_DEPTH = 50;
-				new OptionsView();
 				// TODO Add dialog which tells you to restart the simulation
 			}
 		});
@@ -201,8 +194,6 @@ public class SimulatorView extends JFrame
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				Simulator sim = new Simulator(ModelConstants.OCEAN_WIDTH, ModelConstants.OCEAN_DEPTH);
-				sim.startSimulation();
 			}
 		});
         
