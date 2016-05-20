@@ -28,6 +28,7 @@ public class Simulator {
 		view.setColor(Plankton.class, Color.GREEN);
 		view.setColor(Sardine.class, Color.DARK_GRAY);
 		view.setColor(Shark.class, Color.CYAN);
+		view.setJMenuBar(MenuView.createMenuBar(view));
 	}
 	
 	public void populate() {
