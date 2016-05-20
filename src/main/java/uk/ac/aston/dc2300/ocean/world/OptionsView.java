@@ -101,28 +101,16 @@ public class OptionsView extends JDialog {
 				
 		
 		// TODO add in SpinnerModels for default,min,max,step values
-		JSpinner spinSimulationLenth = new JSpinner(new SpinnerNumberModel(ModelConstants.SIMULATION_LENGTH
-																		  ,100		// min
-																		  ,10000	// max
-																		  ,1));		// step
+		JSpinner spinSimulationLenth = new JSpinner(new SpinnerNumberModel(ModelConstants.SIMULATION_LENGTH, 100, 10000, 1));
 		spinners.add(spinSimulationLenth);
 		
-		JSpinner spinRNGSeed = new JSpinner(new SpinnerNumberModel(ModelConstants.RNG_SEED
-																  ,1
-																  ,1000
-																  ,1)); 
+		JSpinner spinRNGSeed = new JSpinner(new SpinnerNumberModel(ModelConstants.RNG_SEED, 1, 1000, 1)); 
 		spinners.add(spinRNGSeed);
 		
-		JSpinner spinOceanWidth = new JSpinner(new SpinnerNumberModel(ModelConstants.OCEAN_WIDTH
-																	 ,50
-																	 ,500
-																	 ,10)); 
+		JSpinner spinOceanWidth = new JSpinner(new SpinnerNumberModel(ModelConstants.OCEAN_WIDTH, 50, 500, 10)); 
 		spinners.add(spinOceanWidth);
 		
-		JSpinner spinOceanDepth = new JSpinner(new SpinnerNumberModel(ModelConstants.OCEAN_DEPTH
-																	 ,50
-																	 ,500
-																	 ,10)); 
+		JSpinner spinOceanDepth = new JSpinner(new SpinnerNumberModel(ModelConstants.OCEAN_DEPTH, 50, 500, 10)); 
 		spinners.add(spinOceanDepth);
 				
 		JSpinner spinSharkCreationOdds = new JSpinner(new SpinnerNumberModel(ModelConstants.CREATION_ODDS_SHARK, 0.05, 1, 0.05));
