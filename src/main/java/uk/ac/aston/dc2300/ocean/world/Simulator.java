@@ -56,33 +56,14 @@ public class Simulator {
     	probs.put(Species.SARDINE, ModelConstants.CREATION_ODDS_SARDINE);
     	probs.put(Species.SHARK, ModelConstants.CREATION_ODDS_SHARK);
     	
-    	Float totalOdds = 0f;
-    	for (Species species : probs.keySet()) {
-    		totalOdds += probs.get(species);
-    	}
-    	
-    	float finalRand = randomNumber * totalOdds;
     	float subtotal = 0;
     	for(Species species : probs.keySet()) {
     		subtotal += probs.get(species);
-    		if (finalRand < subtotal) {
-    			System.out.println(finalRand);
+    		if (randomNumber < subtotal) {
+    			return species;
     		}
     	}
     	return Species.EMPTY;
-    	
-        /*if(randomNumber <= ModelConstants.CREATION_ODDS_SHARK) {
-            return Species.SHARK;
-        }
-        else if(randomNumber <= ModelConstants.CREATION_ODDS_SARDINE) {
-            return Species.SARDINE;
-        }
-        else if(randomNumber <= ModelConstants.CREATION_ODDS_PLANKTON) {
-            return Species.PLANKTON;
-        }
-        else {
-            return Species.EMPTY;
-        }*/
     }
 	
 	public void startSimulation() {
