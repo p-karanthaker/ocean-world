@@ -53,21 +53,21 @@ public class SimulatorView extends JFrame
         setLocation(100, 50);
         
         fieldView = new FieldView(height, width);
-
+        
         Container contents = getContentPane();
         contents.add(stepLabel, BorderLayout.NORTH);
         contents.add(fieldView, BorderLayout.CENTER);
         contents.add(population, BorderLayout.SOUTH);
 	
-	// Make sure that closing the window ends the application
-	this.setDefaultCloseOperation(
-	      WindowConstants.DISPOSE_ON_CLOSE);
-
-	this.addWindowListener(new WindowAdapter() {
-		public void windowClosing(WindowEvent e) {
-		    exitApp();
-		}
-	});
+		// Make sure that closing the window ends the application
+		this.setDefaultCloseOperation(
+		      WindowConstants.DISPOSE_ON_CLOSE);
+	
+		this.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+			    exitApp();
+			}
+		});
 
         pack();
         setVisible(true);
