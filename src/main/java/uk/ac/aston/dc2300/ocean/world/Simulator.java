@@ -1,6 +1,7 @@
 package uk.ac.aston.dc2300.ocean.world;
 
 import java.awt.Color;
+import java.util.HashMap;
 import java.util.Random;
 
 import uk.ac.aston.dc2300.ocean.life.Plankton;
@@ -29,42 +30,54 @@ public class Simulator {
 	}
 	
 	public void populate() {
-                //Holds the value of the specides chosen randomly
-                Species decicedCreature;
-                RandomGenerator.initialiseWithSeed(ModelConstants.RNG_SEED);
-                Random rand = RandomGenerator.getRandom();
+        //Holds the value of the specides chosen randomly
+        Species decicedCreature;
+        RandomGenerator.initialiseWithSeed(ModelConstants.RNG_SEED);
+        Random rand = RandomGenerator.getRandom();
 		field.clear();
+	            
+	            
+        //Cycle through all locations in the field
+        for(int depth = 0; depth < field.getDepth(); depth++) {
+            for(int width = 0; width < field.getWidth(); width++) {
+                //Use a random number generator to decide what creature to create
+                decicedCreature = creationDecider(rand.nextFloat());
                 
-                
-                //Cycle through all locations in the field
-                for(int d = 0; d < field.getDepth(); d++){
-                    for(int w = 0; w < field.getWidth(); w++){
-                        
-                        //Use a random number generator to decide what creature to create
-                        decicedCreature = creationDecider(rand.nextInt(100));
-                        
-                        //Create the creature and place in field
-                        field.place(CreatureFactory.getCreature(decicedCreature), new Location(d, w));
-                    }
-                }
-	}
-        
-        //Decides what type of creature needs to be created
-        private Species creationDecider(int randomNumber)
-        {
-            if(0 <= randomNumber && randomNumber <= 69){
-                return Species.PLANKTON;
-            }
-            else if(70 <= randomNumber && randomNumber <= 79){
-                return Species.SARDINE ;
-            }
-            else if(80 <= randomNumber && randomNumber <= 84){
-                return Species.SHARK;
-            }
-            else{
-                return Species.EMPTY;
+                //Create the creature and place in field
+                field.place(CreatureFactory.getCreature(decicedCreature), new Location(depth, width));
             }
         }
+	}
+        
+    /**
+     * Using cumulative probability, decide on the type of creature
+     * to place in the Field.
+     * P(A) = 0.1, P(B) = 0.4
+     * Event A occurs if the random number < P(A)
+     * Event B occurs if the random number < P(A) + P(B)
+     * and so on...
+     * 
+     * @param randomNumber
+     * @return the chosen species of creature
+     */
+    private Species creationDecider(float randomNumber) {
+    	// Store creature types in hashmap with their probabilities
+    	HashMap<Species, Float> probs = new HashMap<Species, Float>();
+    	probs.put(Species.PLANKTON, ModelConstants.CREATION_ODDS_PLANKTON);
+    	probs.put(Species.SARDINE, ModelConstants.CREATION_ODDS_SARDINE);
+    	probs.put(Species.SHARK, ModelConstants.CREATION_ODDS_SHARK);
+    	
+    	float subtotal = 0;
+    	/* Loops over the hashmap and checks if the random number is 
+    	 * less than the cumulative probability. */
+    	for(Species species : probs.keySet()) {
+    		subtotal += probs.get(species);
+    		if (randomNumber < subtotal) {
+    			return species;
+    		}
+    	}
+    	return Species.EMPTY;
+    }
 	
 	public void startSimulation() {
 		populate();
