@@ -46,11 +46,7 @@ public class MenuView {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//TODO Open options window to set simulation constants
-				
-				// Set some dummy constants
-				ModelConstants.OCEAN_WIDTH = 50;
-				ModelConstants.OCEAN_DEPTH = 50;
+				new OptionsView();
 				// TODO Add dialog which tells you to restart the simulation
 			}
 		});
@@ -60,6 +56,8 @@ public class MenuView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				parent.dispose();
+				new Simulator(ModelConstants.OCEAN_WIDTH, ModelConstants.OCEAN_DEPTH);
+				
 			}
 		});
         
