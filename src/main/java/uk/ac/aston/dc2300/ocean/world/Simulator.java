@@ -3,6 +3,7 @@ package uk.ac.aston.dc2300.ocean.world;
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.Random;
+import uk.ac.aston.dc2300.ocean.life.Creature;
 
 import uk.ac.aston.dc2300.ocean.life.Plankton;
 import uk.ac.aston.dc2300.ocean.life.Sardine;
@@ -81,7 +82,56 @@ public class Simulator {
 	
 	public void startSimulation() {
 		populate();
+                simulate();
 		view.showStatus(0, field);
 	}
+        
+        private void simulate(){
+            simulateOneStep();
+        }
+        
+        private void simulateOneStep(){
+            for(int depth = 0; depth < field.getDepth(); depth++){
+                    for(int width = 0; width < field.getWidth(); width++){
+                        
+                        Creature currentCreature = null;
+                        
+                        currentCreature = field.getObjectAt(depth, width);
+                        
+                        if(currentCreature != null)
+                        {
+                            //Check the species to see if it can move
+                            if(canMove(currentCreature)){
+
+                                Location newLocation = null;
+                                newLocation = field.freeAdjacentLocation(new Location(depth, width));
+
+                                if(newLocation != null)
+                                {
+                                    //Set new location
+                                    currentCreature.setLocation(newLocation);
+
+                                    //Move to new creature
+                                    field.place(currentCreature, newLocation);
+                                }
+                            }
+                        }
+                    }
+            }
+        }   
+        
+        private boolean canMove(Creature creature)
+        {
+            switch(creature.getSpecies()){
+                case PLANKTON:
+                    return false;
+                case SHARK:
+                case SARDINE:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+        
 	
 }
