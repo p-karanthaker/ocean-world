@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 
 public class OptionsView extends JDialog {
 	
@@ -100,58 +101,70 @@ public class OptionsView extends JDialog {
 				
 		
 		// TODO add in SpinnerModels for default,min,max,step values
-		JSpinner spinSimulationLenth = new JSpinner(); 
+		JSpinner spinSimulationLenth = new JSpinner(new SpinnerNumberModel(ModelConstants.SIMULATION_LENGTH
+																		  ,100		// min
+																		  ,10000	// max
+																		  ,1));		// step
 		spinners.add(spinSimulationLenth);
 		
-		JSpinner spinRNGSeed = new JSpinner(); 
+		JSpinner spinRNGSeed = new JSpinner(new SpinnerNumberModel(ModelConstants.RNG_SEED
+																  ,1
+																  ,1000
+																  ,1)); 
 		spinners.add(spinRNGSeed);
 		
-		JSpinner spinOceanWidth = new JSpinner(); 
+		JSpinner spinOceanWidth = new JSpinner(new SpinnerNumberModel(ModelConstants.OCEAN_WIDTH
+																	 ,50
+																	 ,500
+																	 ,10)); 
 		spinners.add(spinOceanWidth);
 		
-		JSpinner spinOceanDepth = new JSpinner(); 
+		JSpinner spinOceanDepth = new JSpinner(new SpinnerNumberModel(ModelConstants.OCEAN_DEPTH
+																	 ,50
+																	 ,500
+																	 ,10)); 
 		spinners.add(spinOceanDepth);
 				
-		JSpinner spinSharkCreationOdds = new JSpinner(); 
+		JSpinner spinSharkCreationOdds = new JSpinner(new SpinnerNumberModel(ModelConstants.CREATION_ODDS_SHARK, 0.05, 1, 0.05));
 		spinners.add(spinSharkCreationOdds);
 		
-		JSpinner spinSharkBreedingOdds = new JSpinner(); 
+		JSpinner spinSharkBreedingOdds = new JSpinner(new SpinnerNumberModel(ModelConstants.BREEDING_ODDS_SHARK, 0.05, 1, 0.05)); 
 		spinners.add(spinSharkBreedingOdds);
 		
-		JSpinner spinSharkMaximumAge = new JSpinner(); 
+		JSpinner spinSharkMaximumAge = new JSpinner(new SpinnerNumberModel(ModelConstants.MAXIMUM_AGE_SHARK, 0, null, 1)); 
 		spinners.add(spinSharkMaximumAge);
 		
-		JSpinner spinSharkBreedingAge = new JSpinner(); 
+		JSpinner spinSharkBreedingAge = new JSpinner(new SpinnerNumberModel(ModelConstants.BREEDING_AGE_SHARK, 0, null, 1)); 
 		spinners.add(spinSharkBreedingAge);
 				
-		JSpinner spinSardineCreationOdds = new JSpinner(); 
+		JSpinner spinSardineCreationOdds = new JSpinner(new SpinnerNumberModel(ModelConstants.CREATION_ODDS_SARDINE, 0.05, 1, 0.05)); 
 		spinners.add(spinSardineCreationOdds);
 		
-		JSpinner spinSardineBreedingOdds = new JSpinner(); 
+		JSpinner spinSardineBreedingOdds = new JSpinner(new SpinnerNumberModel(ModelConstants.BREEDING_ODDS_SARDINE, 0.05, 1, 0.05)); 
 		spinners.add(spinSardineBreedingOdds);
 		
-		JSpinner spinSardineMaximumAge = new JSpinner(); 
+		JSpinner spinSardineMaximumAge = new JSpinner(new SpinnerNumberModel(ModelConstants.MAXIMUM_AGE_SARDINE, 0, null, 1));
 		spinners.add(spinSardineMaximumAge);
 		
-		JSpinner spinSardineBreedingAge = new JSpinner(); 
+		JSpinner spinSardineBreedingAge = new JSpinner(new SpinnerNumberModel(ModelConstants.BREEDING_AGE_SARDINE, 0, null, 1));
 		spinners.add(spinSardineBreedingAge);
 		
-		JSpinner spinSardineNutritionalValue = new JSpinner(); 
+		JSpinner spinSardineNutritionalValue = new JSpinner(new SpinnerNumberModel(ModelConstants.NUTRITIONAL_VALUE_SARDINE, 0, null, 1));
 		spinners.add(spinSardineNutritionalValue);
 		
-		JSpinner spinPlanktonCreationOdds = new JSpinner(); 
+		JSpinner spinPlanktonCreationOdds = new JSpinner(new SpinnerNumberModel(ModelConstants.CREATION_ODDS_PLANKTON, 0.05, 1, 0.05));
 		spinners.add(spinPlanktonCreationOdds);
 		
-		JSpinner spinPlanktonBreedingOdds = new JSpinner(); 
+		JSpinner spinPlanktonBreedingOdds = new JSpinner(new SpinnerNumberModel(ModelConstants.BREEDING_ODDS_PLANKTON, 0.05, 1, 0.05)); 
 		spinners.add(spinPlanktonBreedingOdds);
 		
-		JSpinner spinPlanktonMaximumAge = new JSpinner(); 
+		JSpinner spinPlanktonMaximumAge = new JSpinner(new SpinnerNumberModel(ModelConstants.MAXIMUM_AGE_PLANKTON, 0, null, 1));
 		spinners.add(spinPlanktonMaximumAge);
 		
-		JSpinner spinPlanktonBreedingAge = new JSpinner(); 
+		JSpinner spinPlanktonBreedingAge = new JSpinner(new SpinnerNumberModel(ModelConstants.BREEDING_AGE_PLANKTON, 0, null, 1));
 		spinners.add(spinPlanktonBreedingAge);
 		
-		JSpinner spinPlanktonNutritionalValue = new JSpinner(); 
+		JSpinner spinPlanktonNutritionalValue = new JSpinner(new SpinnerNumberModel(ModelConstants.NUTRITIONAL_VALUE_PLANKTON, 0, null, 1));
 		spinners.add(spinPlanktonNutritionalValue);
 		
 		
