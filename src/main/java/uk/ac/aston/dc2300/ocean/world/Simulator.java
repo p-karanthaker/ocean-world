@@ -3,8 +3,11 @@ package uk.ac.aston.dc2300.ocean.world;
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.Random;
-import uk.ac.aston.dc2300.ocean.life.Creature;
 
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
+import uk.ac.aston.dc2300.ocean.life.Creature;
 import uk.ac.aston.dc2300.ocean.life.Plankton;
 import uk.ac.aston.dc2300.ocean.life.Sardine;
 import uk.ac.aston.dc2300.ocean.life.Shark;
@@ -16,9 +19,28 @@ public class Simulator {
 	private static SimulatorView view;
 	
 	public static void main(String[] args) {
-		Simulator sim = new Simulator(ModelConstants.OCEAN_WIDTH, ModelConstants.OCEAN_DEPTH);
-		
+	    try {
+	        // Set System L&F
+	        UIManager.setLookAndFeel(
+	            UIManager.getSystemLookAndFeelClassName());
+	    } 
+	    catch (UnsupportedLookAndFeelException e) {
+	       // handle exception
+	    }
+	    catch (ClassNotFoundException e) {
+	       // handle exception
+	    }
+	    catch (InstantiationException e) {
+	       // handle exception
+	    }
+	    catch (IllegalAccessException e) {
+	       // handle exception
+	    }
+
+	    Simulator sim = new Simulator(ModelConstants.OCEAN_WIDTH, ModelConstants.OCEAN_DEPTH); //Create and show the GUI.
 		sim.startSimulation();
+		
+		
 	}
 	
 	public Simulator(int width, int depth) {
