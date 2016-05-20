@@ -15,6 +15,8 @@ import uk.ac.aston.dc2300.ocean.life.Species;
 
 public class Simulator {
 
+	private static Simulator instance = null;
+	
 	private static Field field;
 	private static SimulatorView view;
 	
@@ -37,13 +39,22 @@ public class Simulator {
 	       // handle exception
 	    }
 
-	    Simulator sim = new Simulator(ModelConstants.OCEAN_WIDTH, ModelConstants.OCEAN_DEPTH); //Create and show the GUI.
-		sim.startSimulation();
-		
+	    Simulator.getInstance().init(ModelConstants.OCEAN_WIDTH, ModelConstants.OCEAN_DEPTH);; //Create and show the GUI.
+		Simulator.getInstance().startSimulation();
+	}
+	
+	private Simulator() {
 		
 	}
 	
-	public Simulator(int width, int depth) {
+	public static Simulator getInstance() {
+		if(instance == null) {
+			return new Simulator();
+		}
+		return instance;
+	}
+	
+	public void init(int width, int depth) {
 		field = new Field(ModelConstants.OCEAN_WIDTH, ModelConstants.OCEAN_DEPTH);
 
 		view = new SimulatorView(ModelConstants.OCEAN_WIDTH, ModelConstants.OCEAN_DEPTH);
@@ -105,56 +116,50 @@ public class Simulator {
 	
 	public void startSimulation() {
 		populate();
-                simulate();
+        simulate();
 		view.showStatus(0, field);
 	}
         
-        private void simulate(){
-            simulateOneStep();
-        }
-        
-        private void simulateOneStep(){
-            for(int depth = 0; depth < field.getDepth(); depth++){
-                    for(int width = 0; width < field.getWidth(); width++){
-                        
-                        Creature currentCreature = null;
-                        
-                        currentCreature = field.getObjectAt(depth, width);
-                        
-                        if(currentCreature != null)
-                        {
-                            //Check the species to see if it can move
-                            if(canMove(currentCreature)){
+    private void simulate(){
+        simulateOneStep();
+    }
+    
+    private void simulateOneStep(){
+        for(int depth = 0; depth < field.getDepth(); depth++) {
+            for(int width = 0; width < field.getWidth(); width++) {
+                Creature currentCreature = null;
+                currentCreature = field.getObjectAt(depth, width);
+                
+                if(currentCreature != null) {
+                    //Check the species to see if it can move
+                    if(canMove(currentCreature)) {
 
-                                Location newLocation = null;
-                                newLocation = field.freeAdjacentLocation(new Location(depth, width));
+                        Location newLocation = null;
+                        newLocation = field.freeAdjacentLocation(new Location(depth, width));
 
-                                if(newLocation != null)
-                                {
-                                    //Set new location
-                                    currentCreature.setLocation(newLocation);
+                        if(newLocation != null) {
+                            //Set new location
+                            currentCreature.setLocation(newLocation);
 
-                                    //Move to new creature
-                                    field.place(currentCreature, newLocation);
-                                }
-                            }
+                            //Move to new creature
+                            field.place(currentCreature, newLocation);
                         }
                     }
-            }
-        }   
-        
-        private boolean canMove(Creature creature)
-        {
-            switch(creature.getSpecies()){
-                case PLANKTON:
-                    return false;
-                case SHARK:
-                case SARDINE:
-                    return true;
-                default:
-                    return false;
+                }
             }
         }
+    }   
+    
+    private boolean canMove(Creature creature) {
+        switch(creature.getSpecies()) {
+            case SHARK:
+            case SARDINE:
+                return true;
+            case PLANKTON:
+            default:
+                return false;
+        }
+    }
         
 	
 }

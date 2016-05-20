@@ -56,8 +56,8 @@ public class MenuView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				parent.dispose();
-				new Simulator(ModelConstants.OCEAN_WIDTH, ModelConstants.OCEAN_DEPTH);
-				
+				Simulator.getInstance().init(ModelConstants.OCEAN_WIDTH, ModelConstants.OCEAN_DEPTH);
+				Simulator.getInstance().startSimulation();
 			}
 		});
         
