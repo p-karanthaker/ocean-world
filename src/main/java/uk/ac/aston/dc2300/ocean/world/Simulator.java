@@ -49,14 +49,27 @@ public class Simulator {
         }
 	}
         
-    //Decides what type of creature needs to be created
+    /**
+     * Using cumulative probability, decide on the type of creature
+     * to place in the Field.
+     * P(A) = 0.1, P(B) = 0.4
+     * Event A occurs if the random number < P(A)
+     * Event B occurs if the random number < P(A) + P(B)
+     * and so on...
+     * 
+     * @param randomNumber
+     * @return the chosen species of creature
+     */
     private Species creationDecider(float randomNumber) {
+    	// Store creature types in hashmap with their probabilities
     	HashMap<Species, Float> probs = new HashMap<Species, Float>();
     	probs.put(Species.PLANKTON, ModelConstants.CREATION_ODDS_PLANKTON);
     	probs.put(Species.SARDINE, ModelConstants.CREATION_ODDS_SARDINE);
     	probs.put(Species.SHARK, ModelConstants.CREATION_ODDS_SHARK);
     	
     	float subtotal = 0;
+    	/* Loops over the hashmap and checks if the random number is 
+    	 * less than the cumulative probability. */
     	for(Species species : probs.keySet()) {
     		subtotal += probs.get(species);
     		if (randomNumber < subtotal) {
