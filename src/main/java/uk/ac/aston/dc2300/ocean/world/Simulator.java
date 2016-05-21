@@ -81,7 +81,7 @@ public class Simulator {
                     //Create the creature 
                     Creature newCreature = null;
 
-                    newCreature = CreatureFactory.getCreature(decicedCreature, new Location(depth, width));
+                    newCreature = CreatureFactory.getCreature(decicedCreature, false, new Location(depth, width));
 
                     //and place in field
                     if(newCreature != null){       

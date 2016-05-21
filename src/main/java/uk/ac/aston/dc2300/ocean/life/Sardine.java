@@ -4,8 +4,8 @@ import uk.ac.aston.dc2300.ocean.world.Location;
 
 public class Sardine extends Fish {
 
-	public Sardine(Location initialLocation) {
-		super(Species.SARDINE, initialLocation);
+	public Sardine(boolean isAgeZero, Location initialLocation) {
+		super(Species.SARDINE, isAgeZero, initialLocation);
 	}
 
 	@Override

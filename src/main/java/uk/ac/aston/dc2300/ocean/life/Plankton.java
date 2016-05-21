@@ -4,8 +4,8 @@ import uk.ac.aston.dc2300.ocean.world.Location;
 
 public class Plankton extends Creature {
 	
-	public Plankton(Location initialLocation) {
-		super(Species.PLANKTON, initialLocation);
+	public Plankton(boolean isAgeZero, Location initialLocation) {
+		super(Species.PLANKTON, isAgeZero, initialLocation);
 	}
 
 	@Override

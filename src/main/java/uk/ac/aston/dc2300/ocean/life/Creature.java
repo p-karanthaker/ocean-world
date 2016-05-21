@@ -2,6 +2,7 @@ package uk.ac.aston.dc2300.ocean.life;
 
 import uk.ac.aston.dc2300.ocean.world.Location;
 import uk.ac.aston.dc2300.ocean.world.ModelConstants;
+import uk.ac.aston.dc2300.ocean.world.RandomGenerator;
 
 /**
  * Creature class.
@@ -11,43 +12,23 @@ import uk.ac.aston.dc2300.ocean.world.ModelConstants;
  */
 public class Creature {
 	
-	/* Constants */
-	private static double CREATION_ODDS;
-	private static double BREEDING_ODDS;
-	private static int MAXIMUM_AGE;
-	private static int BREEDING_AGE;
-	private static int NUTRITIONAL_VALUE;
-	
 	private int age;
 	private Location location;
 	
 	private Species SPECIES;
 	
-	public Creature(Species species, Location initialLocation) {
-		this.age = 0;
-                this.location = initialLocation;
+	public Creature(Species species, boolean isAgeZero, Location initialLocation) {
+		this.location = initialLocation;
 		switch (species) {
 			case PLANKTON:
 				SPECIES = species;
-				CREATION_ODDS = ModelConstants.CREATION_ODDS_PLANKTON;
-				BREEDING_ODDS = ModelConstants.BREEDING_ODDS_PLANKTON;
-				MAXIMUM_AGE = ModelConstants.MAXIMUM_AGE_PLANKTON;
-				BREEDING_AGE = ModelConstants.BREEDING_AGE_PLANKTON;
-				NUTRITIONAL_VALUE = ModelConstants.NUTRITIONAL_VALUE_PLANKTON;				
+				this.age = isAgeZero ? 0 : RandomGenerator.getRandom().nextInt(ModelConstants.MAXIMUM_AGE_PLANKTON + 1);
 			case SARDINE:
 				SPECIES = species;
-				CREATION_ODDS = ModelConstants.CREATION_ODDS_SARDINE;
-				BREEDING_ODDS = ModelConstants.BREEDING_ODDS_SARDINE;
-				MAXIMUM_AGE = ModelConstants.MAXIMUM_AGE_SARDINE;
-				BREEDING_AGE = ModelConstants.BREEDING_AGE_SARDINE;
-				NUTRITIONAL_VALUE = ModelConstants.NUTRITIONAL_VALUE_SARDINE;
+				this.age = isAgeZero ? 0 : RandomGenerator.getRandom().nextInt(ModelConstants.MAXIMUM_AGE_SARDINE + 1);
 			case SHARK:
 				SPECIES = species;
-				CREATION_ODDS = ModelConstants.CREATION_ODDS_SHARK;
-				BREEDING_ODDS = ModelConstants.BREEDING_ODDS_SHARK;
-				MAXIMUM_AGE = ModelConstants.MAXIMUM_AGE_SHARK;
-				BREEDING_AGE = ModelConstants.BREEDING_AGE_SHARK;
-				NUTRITIONAL_VALUE = 0;
+				this.age = isAgeZero ? 0 : RandomGenerator.getRandom().nextInt(ModelConstants.MAXIMUM_AGE_SHARK + 1);
 			default:
 				return;
 		}
@@ -86,41 +67,6 @@ public class Creature {
 	 */
 	public void setLocation(Location location) {
 		this.location = location;
-	}
-
-	/**
-	 * @return the MAX_AGE of the Creature
-	 */
-	public int getMaxAge() {
-		return MAXIMUM_AGE;
-	}
-
-	/**
-	 * @return the MIN_BREEDING_AGE of the Creature
-	 */
-	public int getMinBreedingAge() {
-		return BREEDING_AGE;
-	}
-
-	/**
-	 * @return the NUTRITIONAL_VALUE of the Creature
-	 */
-	public int getNutritionalValue() {
-		return NUTRITIONAL_VALUE;
-	}
-
-	/**
-	 * @return the CREATION_ODDS of the Creature
-	 */
-	public double getCreationOdds() {
-		return CREATION_ODDS;
-	}
-
-	/**
-	 * @return the BREEDING_ODDS of the Creature
-	 */
-	public double getBreedingOdds() {
-		return BREEDING_ODDS;
 	}
 	
 	/**
