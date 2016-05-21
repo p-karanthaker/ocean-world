@@ -21,10 +21,11 @@ public class Creature {
 	private int age;
 	private Location location;
 	
-	private static Species SPECIES;
+	private Species SPECIES;
 	
-	public Creature(Species species) {
+	public Creature(Species species, Location initialLocation) {
 		this.age = 0;
+                this.location = initialLocation;
 		switch (species) {
 			case PLANKTON:
 				SPECIES = species;

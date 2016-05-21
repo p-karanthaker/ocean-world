@@ -111,11 +111,13 @@ public class Field
 		while(adjacent.hasNext()) {
 			Location next = (Location) adjacent.next();
 			if(field[next.getRow()][next.getCol()] == null) {
+
 				return next;
 			}
 		}
 		// check whether current location is free
 		if(field[location.getRow()][location.getCol()] == null) {
+
 			return location;
 		} 
 		else {

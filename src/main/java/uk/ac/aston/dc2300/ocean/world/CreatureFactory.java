@@ -12,14 +12,14 @@ import uk.ac.aston.dc2300.ocean.life.*;
  */
 abstract public class CreatureFactory {
     
-    public static Creature getCreature(Species species){
+    public static Creature getCreature(Species species, Location initialLocation){
     	switch (species) {
 	    	case PLANKTON:
-	    		return new Plankton();
+	    		return new Plankton(initialLocation);
 	    	case SARDINE:
-	    		return new Sardine();
+	    		return new Sardine(initialLocation);
 	    	case SHARK:
-	    		return new Shark();
+	    		return new Shark(initialLocation);
 	    	default:
 	    		return null;
     	}

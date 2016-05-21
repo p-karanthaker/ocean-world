@@ -65,23 +65,30 @@ public class Simulator {
 	}
 	
 	public void populate() {
-        //Holds the value of the specides chosen randomly
-        Species decicedCreature;
-        RandomGenerator.initialiseWithSeed(ModelConstants.RNG_SEED);
-        Random rand = RandomGenerator.getRandom();
-		field.clear();
-	            
-	            
-        //Cycle through all locations in the field
-        for(int depth = 0; depth < field.getDepth(); depth++) {
-            for(int width = 0; width < field.getWidth(); width++) {
-                //Use a random number generator to decide what creature to create
-                decicedCreature = creationDecider(rand.nextDouble());
-                
-                //Create the creature and place in field
-                field.place(CreatureFactory.getCreature(decicedCreature), new Location(depth, width));
+            //Holds the value of the specides chosen randomly
+            Species decicedCreature;
+            RandomGenerator.initialiseWithSeed(ModelConstants.RNG_SEED);
+            Random rand = RandomGenerator.getRandom();
+                    field.clear();
+
+
+            //Cycle through all locations in the field
+            for(int depth = 0; depth < field.getDepth(); depth++) {
+                for(int width = 0; width < field.getWidth(); width++) {
+                    //Use a random number generator to decide what creature to create
+                    decicedCreature = creationDecider(rand.nextDouble());
+
+                    //Create the creature 
+                    Creature newCreature = null;
+
+                    newCreature = CreatureFactory.getCreature(decicedCreature, new Location(depth, width));
+
+                    //and place in field
+                    if(newCreature != null){       
+                        field.place(newCreature, newCreature.getLocation());
+                    }
+                }
             }
-        }
 	}
         
     /**
@@ -114,16 +121,26 @@ public class Simulator {
     	return Species.EMPTY;
     }
 	
-	public void startSimulation() {
-		populate();
+    public void startSimulation() {
+	populate();
         simulate();
-		view.showStatus(0, field);
-	}
-        
+		
+    }
+       
+    /**
+     * Simulates the ocean field and all activity for the pre-defined number of steps
+     */
     private void simulate(){
-        simulateOneStep();
+        for(int simStep = 1; simStep <= ModelConstants.SIMULATION_LENGTH; simStep++)
+        {
+            simulateOneStep();
+            view.showStatus(simStep, field);
+        }
     }
     
+    /**
+     * Handles the movement of all the creatures per step in the simulation
+     */
     private void simulateOneStep(){
         for(int depth = 0; depth < field.getDepth(); depth++) {
             for(int width = 0; width < field.getWidth(); width++) {
@@ -131,16 +148,16 @@ public class Simulator {
                 currentCreature = field.getObjectAt(depth, width);
                 
                 if(currentCreature != null) {
+                    
                     //Check the species to see if it can move
                     if(canMove(currentCreature)) {
-
                         Location newLocation = null;
-                        newLocation = field.freeAdjacentLocation(new Location(depth, width));
+                        newLocation = field.freeAdjacentLocation(currentCreature.getLocation());
 
                         if(newLocation != null) {
                             //Set new location
                             currentCreature.setLocation(newLocation);
-
+                            
                             //Move to new creature
                             field.place(currentCreature, newLocation);
                         }
@@ -150,6 +167,13 @@ public class Simulator {
         }
     }   
     
+    
+    /**
+     * Decides if the creature which has been chosen to be created
+     * Is able to move
+     * @param creature 
+     * @return if the creature is able to move in the simulation
+     */
     private boolean canMove(Creature creature) {
         switch(creature.getSpecies()) {
             case SHARK:

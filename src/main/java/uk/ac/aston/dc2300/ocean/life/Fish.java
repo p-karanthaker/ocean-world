@@ -1,11 +1,13 @@
 package uk.ac.aston.dc2300.ocean.life;
 
+import uk.ac.aston.dc2300.ocean.world.Location;
+
 abstract public class Fish extends Creature {
 
 	private int foodLevel;
 	
-	public Fish(Species species) {
-		super(species);
+	public Fish(Species species, Location initialLocation) {
+		super(species, initialLocation);
 		// TODO Auto-generated constructor stub
 	}
 	

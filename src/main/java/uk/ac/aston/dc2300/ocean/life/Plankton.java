@@ -1,9 +1,11 @@
 package uk.ac.aston.dc2300.ocean.life;
 
+import uk.ac.aston.dc2300.ocean.world.Location;
+
 public class Plankton extends Creature {
 	
-	public Plankton() {
-		super(Species.PLANKTON);
+	public Plankton(Location initialLocation) {
+		super(Species.PLANKTON, initialLocation);
 	}
 
 	@Override

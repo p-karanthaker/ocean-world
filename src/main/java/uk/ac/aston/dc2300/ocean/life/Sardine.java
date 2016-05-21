@@ -1,9 +1,11 @@
 package uk.ac.aston.dc2300.ocean.life;
 
+import uk.ac.aston.dc2300.ocean.world.Location;
+
 public class Sardine extends Fish {
 
-	public Sardine() {
-		super(Species.SARDINE);
+	public Sardine(Location initialLocation) {
+		super(Species.SARDINE, initialLocation);
 	}
 
 	@Override
