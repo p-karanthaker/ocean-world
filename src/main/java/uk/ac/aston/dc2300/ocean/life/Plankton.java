@@ -10,13 +10,8 @@ public class Plankton extends Creature {
 	}
 
 	@Override
-	public void reproduce() {
-		// Create a baby Plankton?
-	}
-
-	@Override
 	public void act(Field field) {
-		// TODO Auto-generated method stub
+		super.act(field);
 		
 	}
 	

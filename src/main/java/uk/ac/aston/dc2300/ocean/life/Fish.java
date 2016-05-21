@@ -10,14 +10,6 @@ abstract public class Fish extends Creature {
 		super(species, isAgeZero, initialLocation);
 		// TODO Auto-generated constructor stub
 	}
-	
-	public void swim() {
-		// TODO Implement swimming
-	}
-	
-	public void eat(Creature creature) {
-		// TODO Implement eating fully
-	}
 
 	// Getters and Setters
 	
