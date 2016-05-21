@@ -58,6 +58,8 @@ abstract public class Fish extends Creature {
             field.place(null, oldLocation);
         }
 	}
+        
+        public abstract eatFood(List<Location> possibleFood);
 	
 	
 }
