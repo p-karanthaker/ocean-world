@@ -16,12 +16,13 @@ abstract public class Fish extends Creature {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Location findFood(Field field) {
+	public List<Location> findFood(Field field) {
+		List<Location> locations = new ArrayList<Location>();
 		Iterator adjacent = field.adjacentLocations(getLocation());
 		while(adjacent.hasNext()) {
 			Location next = (Location) adjacent.next();
 			if(field.getObjectAt(next) != null) {
-				return next;
+				locations.add(next);
 			}
 		}
 		return null;
