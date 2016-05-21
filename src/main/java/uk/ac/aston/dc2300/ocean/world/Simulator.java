@@ -147,50 +147,8 @@ public class Simulator {
      * Handles the movement of all the creatures per step in the simulation
      */
     private void simulateOneStep(){
-        Creature currentCreature = null;
-        Location newLocation = null;
         for(Creature creature : creatures){
-                currentCreature = creature;
-                
-                //Check the species to see if it can move
-                if(canMove(currentCreature)) {
-                    
-                    newLocation = field.freeAdjacentLocation(currentCreature.getLocation());
-
-                    if(newLocation != null) {
-                        
-                        Location oldLocation = currentCreature.getLocation();
-                        
-                        //Set new location
-                        currentCreature.setLocation(newLocation);
-                            
-                        //Move to new creature
-                        field.place(currentCreature, newLocation);
-                        
-                        field.place(null, oldLocation);
-                    }
-                }
+        	creature.act(field);
         }
     }
- 
-    
-    
-    /**
-     * Decides if the creature which has been chosen to be created
-     * Is able to move
-     * @param creature 
-     * @return if the creature is able to move in the simulation
-     */
-    private boolean canMove(Creature creature) {
-        switch(creature.getSpecies()) {
-            case SHARK:
-            case SARDINE:
-                return true;
-            case PLANKTON:
-            default:
-                return false;
-        }
-    }
-        
-	
 }
