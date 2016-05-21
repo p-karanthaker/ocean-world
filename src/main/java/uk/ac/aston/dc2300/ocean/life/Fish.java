@@ -25,7 +25,7 @@ abstract public class Fish extends Creature {
 				locations.add(next);
 			}
 		}
-		return null;
+		return locations;
 	}
 	
 	/**
