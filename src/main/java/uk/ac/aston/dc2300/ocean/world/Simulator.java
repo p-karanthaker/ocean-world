@@ -146,30 +146,25 @@ public class Simulator {
      * Handles the movement of all the creatures per step in the simulation
      */
     private void simulateOneStep(){
-        for(int depth = 0; depth < field.getDepth(); depth++) {
-            for(int width = 0; width < field.getWidth(); width++) {
-                Creature currentCreature = null;
-                currentCreature = field.getObjectAt(depth, width);
+        for(Creature creature : creatures){
+                Creature currentCreature = creature;
                 
-                if(currentCreature != null) {
-                    
-                    //Check the species to see if it can move
-                    if(canMove(currentCreature)) {
-                        Location newLocation = null;
-                        newLocation = field.freeAdjacentLocation(currentCreature.getLocation());
+                //Check the species to see if it can move
+                if(canMove(currentCreature)) {
+                    Location newLocation = null;
+                    newLocation = field.freeAdjacentLocation(currentCreature.getLocation());
 
-                        if(newLocation != null) {
-                            //Set new location
-                            currentCreature.setLocation(newLocation);
+                    if(newLocation != null) {                       
+                        //Set new location
+                        currentCreature.setLocation(newLocation);
                             
-                            //Move to new creature
-                            field.place(currentCreature, newLocation);
-                        }
+                        //Move to new creature
+                        field.place(currentCreature, newLocation);
                     }
                 }
-            }
         }
-    }   
+    }
+ 
     
     
     /**
