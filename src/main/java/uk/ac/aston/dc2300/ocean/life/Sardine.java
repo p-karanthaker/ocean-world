@@ -1,7 +1,7 @@
 package uk.ac.aston.dc2300.ocean.life;
 
-import com.sun.media.sound.ModelAbstractChannelMixer;
 import java.util.List;
+
 import uk.ac.aston.dc2300.ocean.world.Field;
 import uk.ac.aston.dc2300.ocean.world.Location;
 
@@ -17,7 +17,7 @@ public class Sardine extends Fish {
 			// move somewhere using super?
 			super.act(field);
 		} else {
-			// try to eat
+			eatFood(findFood(field), field);
 		}
 	}
         

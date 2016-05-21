@@ -59,7 +59,7 @@ abstract public class Fish extends Creature {
         }
 	}
         
-        public abstract eatFood(List<Location> possibleFood);
+    public abstract void eatFood(List<Location> possibleFood, Field field);
 	
 	
 }

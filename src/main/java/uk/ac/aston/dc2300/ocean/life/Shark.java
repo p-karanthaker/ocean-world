@@ -1,5 +1,7 @@
 package uk.ac.aston.dc2300.ocean.life;
 
+import java.util.List;
+
 import uk.ac.aston.dc2300.ocean.world.Field;
 import uk.ac.aston.dc2300.ocean.world.Location;
 
@@ -17,6 +19,12 @@ public class Shark extends Fish {
 		} else {
 			// try to eat
 		}
+	}
+
+	@Override
+	public void eatFood(List<Location> possibleFood, Field field) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
