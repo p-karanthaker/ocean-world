@@ -78,7 +78,8 @@ public class Simulator {
             //Cycle through all locations in the field
             for(int depth = 0; depth < field.getDepth(); depth++) {
                 for(int width = 0; width < field.getWidth(); width++) {
-                    //Use a random number generator to decide what creature to create
+                    
+                  //Use a random number generator to decide what creature to create
                     decicedCreature = creationDecider(rand.nextDouble());
 
                     //Create the creature 
@@ -146,20 +147,27 @@ public class Simulator {
      * Handles the movement of all the creatures per step in the simulation
      */
     private void simulateOneStep(){
+        Creature currentCreature = null;
+        Location newLocation = null;
         for(Creature creature : creatures){
-                Creature currentCreature = creature;
+                currentCreature = creature;
                 
                 //Check the species to see if it can move
                 if(canMove(currentCreature)) {
-                    Location newLocation = null;
+                    
                     newLocation = field.freeAdjacentLocation(currentCreature.getLocation());
 
-                    if(newLocation != null) {                       
+                    if(newLocation != null) {
+                        
+                        Location oldLocation = currentCreature.getLocation();
+                        
                         //Set new location
                         currentCreature.setLocation(newLocation);
                             
                         //Move to new creature
                         field.place(currentCreature, newLocation);
+                        
+                        field.place(null, oldLocation);
                     }
                 }
         }
