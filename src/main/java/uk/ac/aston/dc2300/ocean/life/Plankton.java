@@ -1,5 +1,6 @@
 package uk.ac.aston.dc2300.ocean.life;
 
+import uk.ac.aston.dc2300.ocean.world.Field;
 import uk.ac.aston.dc2300.ocean.world.Location;
 
 public class Plankton extends Creature {
@@ -10,8 +11,13 @@ public class Plankton extends Creature {
 
 	@Override
 	public void reproduce() {
-		// Create a baby Plankton? Super-method will set location?
-		super.reproduce();
+		// Create a baby Plankton?
+	}
+
+	@Override
+	public void act(Field field) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

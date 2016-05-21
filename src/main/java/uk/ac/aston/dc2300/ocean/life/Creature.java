@@ -1,5 +1,6 @@
 package uk.ac.aston.dc2300.ocean.life;
 
+import uk.ac.aston.dc2300.ocean.world.Field;
 import uk.ac.aston.dc2300.ocean.world.Location;
 import uk.ac.aston.dc2300.ocean.world.ModelConstants;
 import uk.ac.aston.dc2300.ocean.world.RandomGenerator;
@@ -10,7 +11,7 @@ import uk.ac.aston.dc2300.ocean.world.RandomGenerator;
  * @author Karan Thaker
  *
  */
-public class Creature {
+public abstract class Creature {
 	
 	private int age;
 	private Location location;
@@ -34,10 +35,9 @@ public class Creature {
 		}
 	}
 	
-	public void reproduce() {
-		// TODO Implement reproducing
-		// Set the location of the new Creature here?
-	}
+	abstract public void reproduce();
+	
+	abstract public void act(Field field);
 	
 	// Getters and Setters
 	
