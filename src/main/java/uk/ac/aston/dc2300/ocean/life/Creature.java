@@ -15,11 +15,13 @@ public abstract class Creature {
 	
 	private int age;
 	private Location location;
+	private boolean isAlive;
 	
 	private Species SPECIES;
 	
 	public Creature(Species species, boolean isAgeZero, Location initialLocation) {
 		this.location = initialLocation;
+		this.setIsAlive(true);
 		switch (species) {
 			case PLANKTON:
 				SPECIES = species;
@@ -35,9 +37,13 @@ public abstract class Creature {
 		}
 	}
 	
-	abstract public void reproduce();
+	public void act(Field field) {
+		incrementAge();
+	}
 	
-	abstract public void act(Field field);
+	public void incrementAge() {
+		setAge(getAge() + 1);
+	}
 	
 	// Getters and Setters
 	
@@ -75,6 +81,14 @@ public abstract class Creature {
 	 */
 	public Species getSpecies() {
 		return SPECIES;
+	}
+
+	public boolean isAlive() {
+		return isAlive;
+	}
+
+	public void setIsAlive(boolean isAlive) {
+		this.isAlive = isAlive;
 	}
 	
 }

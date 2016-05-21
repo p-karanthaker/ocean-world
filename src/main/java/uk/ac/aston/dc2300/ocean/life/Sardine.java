@@ -10,20 +10,8 @@ public class Sardine extends Fish {
 	}
 
 	@Override
-	public void eat(Creature creature) {
-		// TODO Implement Sardine eating Plankton. Food Level will change in super-method.
-		super.eat(creature);
-	}
-	
-	@Override
-	public void reproduce() {
-		// TODO Create a baby Sardine?
-	}
-
-	@Override
 	public void act(Field field) {
-		// TODO Auto-generated method stub
-		
+		super.act(field);
 	}
 	
 }
