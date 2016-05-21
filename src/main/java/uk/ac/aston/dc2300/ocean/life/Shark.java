@@ -4,8 +4,8 @@ import uk.ac.aston.dc2300.ocean.world.Location;
 
 public class Shark extends Fish {
 
-	public Shark(Location initialLocation) {
-		super(Species.SHARK, initialLocation);
+	public Shark(boolean isAgeZero, Location initialLocation) {
+		super(Species.SHARK, isAgeZero, initialLocation);
 	}
 
 	@Override

@@ -3,7 +3,7 @@ package uk.ac.aston.dc2300.ocean.world;
 import java.util.Random;
 
 
-class RandomGenerator {
+public class RandomGenerator {
 	private static Random random=null;   
 	private static int seed= 27;
 

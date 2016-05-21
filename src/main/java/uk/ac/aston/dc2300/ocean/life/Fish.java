@@ -6,8 +6,8 @@ abstract public class Fish extends Creature {
 
 	private int foodLevel;
 	
-	public Fish(Species species, Location initialLocation) {
-		super(species, initialLocation);
+	public Fish(Species species, boolean isAgeZero, Location initialLocation) {
+		super(species, isAgeZero, initialLocation);
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -17,7 +17,6 @@ abstract public class Fish extends Creature {
 	
 	public void eat(Creature creature) {
 		// TODO Implement eating fully
-		setFoodLevel(getFoodLevel() + creature.getNutritionalValue());
 	}
 
 	// Getters and Setters
