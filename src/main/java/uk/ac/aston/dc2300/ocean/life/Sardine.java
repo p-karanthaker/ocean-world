@@ -13,12 +13,7 @@ public class Sardine extends Fish {
 
 	@Override
 	public void act(Field field) {
-		if(findFood(field).isEmpty()) {
-			// move somewhere using super?
-			super.act(field);
-		} else {
-			// try to eat
-		}
+		super.act(field);
 	}
         
         public void eatFood(List<Location> possibleFood, Field field){
