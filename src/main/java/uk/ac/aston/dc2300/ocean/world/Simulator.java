@@ -2,6 +2,7 @@ package uk.ac.aston.dc2300.ocean.world;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -9,11 +10,7 @@ import java.util.Random;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import uk.ac.aston.dc2300.ocean.life.Creature;
-import uk.ac.aston.dc2300.ocean.life.Plankton;
-import uk.ac.aston.dc2300.ocean.life.Sardine;
-import uk.ac.aston.dc2300.ocean.life.Shark;
-import uk.ac.aston.dc2300.ocean.life.Species;
+import uk.ac.aston.dc2300.ocean.life.*;
 
 public class Simulator {
 
@@ -135,11 +132,18 @@ public class Simulator {
     /**
      * Simulates the ocean field and all activity for the pre-defined number of steps
      */
-    private void simulate(){
+    private void simulate() {
         for(int simStep = 1; simStep <= ModelConstants.SIMULATION_LENGTH; simStep++)
         {
             simulateOneStep();
             view.showStatus(simStep, field);
+            try {
+    Thread.sleep(1000);
+} catch (InterruptedException e) {
+    e.printStackTrace();
+    // handle the exception...        
+    // For example consider calling Thread.currentThread().interrupt(); here.
+}
         }
     }
     
@@ -147,6 +151,7 @@ public class Simulator {
      * Handles the movement of all the creatures per step in the simulation
      */
     private void simulateOneStep(){
+        Collections.shuffle(creatures);
         for(Creature creature : creatures){
         	creature.act(field);
         }
