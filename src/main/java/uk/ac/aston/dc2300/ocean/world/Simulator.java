@@ -1,7 +1,9 @@
 package uk.ac.aston.dc2300.ocean.world;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 import javax.swing.UIManager;
@@ -19,6 +21,7 @@ public class Simulator {
 	
 	private static Field field;
 	private static SimulatorView view;
+	private List<Creature> creatures = new ArrayList<Creature>();
 	
 	public static void main(String[] args) {
 	    try {
@@ -82,10 +85,11 @@ public class Simulator {
                     Creature newCreature = null;
 
                     newCreature = CreatureFactory.getCreature(decicedCreature, false, new Location(depth, width));
-
+                    
                     //and place in field
                     if(newCreature != null){       
                         field.place(newCreature, newCreature.getLocation());
+                        creatures.add(newCreature);
                     }
                 }
             }
