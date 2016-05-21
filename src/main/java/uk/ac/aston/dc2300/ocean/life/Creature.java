@@ -12,8 +12,8 @@ import uk.ac.aston.dc2300.ocean.world.ModelConstants;
 public class Creature {
 	
 	/* Constants */
-	private static float CREATION_ODDS;
-	private static float BREEDING_ODDS;
+	private static double CREATION_ODDS;
+	private static double BREEDING_ODDS;
 	private static int MAXIMUM_AGE;
 	private static int BREEDING_AGE;
 	private static int NUTRITIONAL_VALUE;
@@ -111,14 +111,14 @@ public class Creature {
 	/**
 	 * @return the CREATION_ODDS of the Creature
 	 */
-	public float getCreationOdds() {
+	public double getCreationOdds() {
 		return CREATION_ODDS;
 	}
 
 	/**
 	 * @return the BREEDING_ODDS of the Creature
 	 */
-	public float getBreedingOdds() {
+	public double getBreedingOdds() {
 		return BREEDING_ODDS;
 	}
 	

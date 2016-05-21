@@ -76,7 +76,7 @@ public class Simulator {
         for(int depth = 0; depth < field.getDepth(); depth++) {
             for(int width = 0; width < field.getWidth(); width++) {
                 //Use a random number generator to decide what creature to create
-                decicedCreature = creationDecider(rand.nextFloat());
+                decicedCreature = creationDecider(rand.nextDouble());
                 
                 //Create the creature and place in field
                 field.place(CreatureFactory.getCreature(decicedCreature), new Location(depth, width));
@@ -95,14 +95,14 @@ public class Simulator {
      * @param randomNumber
      * @return the chosen species of creature
      */
-    private Species creationDecider(float randomNumber) {
+    private Species creationDecider(double randomNumber) {
     	// Store creature types in hashmap with their probabilities
-    	HashMap<Species, Float> probs = new HashMap<Species, Float>();
+    	HashMap<Species, Double> probs = new HashMap<Species, Double>();
     	probs.put(Species.PLANKTON, ModelConstants.CREATION_ODDS_PLANKTON);
     	probs.put(Species.SARDINE, ModelConstants.CREATION_ODDS_SARDINE);
     	probs.put(Species.SHARK, ModelConstants.CREATION_ODDS_SHARK);
     	
-    	float subtotal = 0;
+    	double subtotal = 0;
     	/* Loops over the hashmap and checks if the random number is 
     	 * less than the cumulative probability. */
     	for(Species species : probs.keySet()) {

@@ -1,12 +1,15 @@
 package uk.ac.aston.dc2300.ocean.world;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
@@ -31,6 +34,8 @@ public class OptionsView extends JDialog {
 		add(buttonCancel);
 		add(buttonOK);
 		
+		setButtonListeners(this);
+		
 		setModal(true);
 		setAlwaysOnTop (true);
 		setModalityType(ModalityType.APPLICATION_MODAL);
@@ -39,6 +44,47 @@ public class OptionsView extends JDialog {
 		
 		pack();
 		setVisible(true);
+	}
+	
+	private void setButtonListeners(final JDialog frame) {
+		buttonOK.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setConfigParams();
+				JOptionPane.showMessageDialog(frame, "Press Menu > Restart Simulation for the new changes to take effect.");
+				dispose();
+			}
+		});
+		
+		buttonCancel.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+	}
+	
+	private void setConfigParams() {
+		ModelConstants.SIMULATION_LENGTH = (Integer) spinners.get(0).getValue();
+		ModelConstants.RNG_SEED = (Integer) spinners.get(1).getValue();
+		ModelConstants.OCEAN_WIDTH = (Integer) spinners.get(2).getValue();
+		ModelConstants.OCEAN_DEPTH = (Integer) spinners.get(3).getValue();
+		ModelConstants.CREATION_ODDS_SHARK = (Double) spinners.get(4).getValue();
+		ModelConstants.BREEDING_ODDS_SHARK = (Double) spinners.get(5).getValue();
+		ModelConstants.MAXIMUM_AGE_SHARK = (Integer) spinners.get(6).getValue();
+		ModelConstants.BREEDING_AGE_SHARK = (Integer) spinners.get(7).getValue();
+		ModelConstants.CREATION_ODDS_SARDINE = (Double) spinners.get(8).getValue();
+		ModelConstants.BREEDING_ODDS_SARDINE = (Double) spinners.get(9).getValue();
+		ModelConstants.MAXIMUM_AGE_SARDINE = (Integer) spinners.get(10).getValue();
+		ModelConstants.BREEDING_AGE_SARDINE = (Integer) spinners.get(11).getValue();
+		ModelConstants.NUTRITIONAL_VALUE_SARDINE = (Integer) spinners.get(12).getValue();
+		ModelConstants.CREATION_ODDS_PLANKTON = (Double) spinners.get(13).getValue();
+		ModelConstants.BREEDING_ODDS_PLANKTON = (Double) spinners.get(14).getValue();
+		ModelConstants.MAXIMUM_AGE_PLANKTON = (Integer) spinners.get(15).getValue();
+		ModelConstants.BREEDING_AGE_PLANKTON = (Integer) spinners.get(16).getValue();
+		ModelConstants.NUTRITIONAL_VALUE_PLANKTON = (Integer) spinners.get(17).getValue();
 	}
 	
 	public void buildComponents() {
