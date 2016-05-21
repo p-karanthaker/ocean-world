@@ -1,5 +1,9 @@
 package uk.ac.aston.dc2300.ocean.life;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import uk.ac.aston.dc2300.ocean.world.Field;
 import uk.ac.aston.dc2300.ocean.world.Location;
 
@@ -11,8 +15,17 @@ abstract public class Fish extends Creature {
 		super(species, isAgeZero, initialLocation);
 		// TODO Auto-generated constructor stub
 	}
-
-	// Getters and Setters
+	
+	public Location findFood(Field field) {
+		Iterator adjacent = field.adjacentLocations(getLocation());
+		while(adjacent.hasNext()) {
+			Location next = (Location) adjacent.next();
+			if(field.getObjectAt(next) != null) {
+				return next;
+			}
+		}
+		return null;
+	}
 	
 	/**
 	 * @return the foodLevel
