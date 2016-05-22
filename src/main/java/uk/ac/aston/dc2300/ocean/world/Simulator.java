@@ -124,7 +124,8 @@ public class Simulator {
     }
 	
     public void startSimulation() {
-	populate();
+    	creatures.clear();
+    	populate();
         simulate();
 		
     }

@@ -13,18 +13,27 @@ public class Shark extends Fish {
 
 	@Override
 	public void act(Field field) {
-		if(findFood(field).isEmpty()) {
-			// move somewhere using super?
-			super.act(field);
-		} else {
-			// try to eat
-		}
+		//super.act(field);
 	}
 
 	@Override
-	public void eatFood(List<Location> possibleFood, Field field) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void eatFood(List<Location> possibleFood, Field field){
+        Creature creature = null;
+        for(Location location : possibleFood)
+        {
+            creature = field.getObjectAt(location);
+            
+            if(creature.getSpecies() == Species.SARDINE){
+                creature.setIsAlive(false);
+                this.setFoodLevel(this.getFoodLevel() + 1);
+                
+                field.place(null, this.getLocation());
+                this.setLocation(location);
+                field.place(this, location);
+                
+                break;
+            }
+        }
+    }
 	
 }

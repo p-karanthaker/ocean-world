@@ -16,9 +16,9 @@ abstract public class Fish extends Creature {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public List<Location> findFood(Field field) {
+	protected List<Location> findFood(Field field) {
 		List<Location> locations = new ArrayList<Location>();
-		Iterator adjacent = field.adjacentLocations(getLocation());
+		Iterator<Location> adjacent = field.adjacentLocations(getLocation());
 		while(adjacent.hasNext()) {
 			Location next = (Location) adjacent.next();
 			if(field.getObjectAt(next) != null) {
@@ -26,6 +26,21 @@ abstract public class Fish extends Creature {
 			}
 		}
 		return locations;
+	}
+	
+	protected void swim(Field field) {
+		Location newLocation = field.freeAdjacentLocation(getLocation());
+        if(newLocation != null) {
+            
+            Location oldLocation = getLocation();
+            
+            //Set new location
+            setLocation(newLocation);
+                
+            //Move to new creature
+            field.place(this, newLocation);
+            field.place(null, oldLocation);
+        }
 	}
 	
 	/**
@@ -44,19 +59,13 @@ abstract public class Fish extends Creature {
 
 	@Override
 	public void act(Field field) {
+		// increment age
 		super.act(field);
-		Location newLocation = field.freeAdjacentLocation(getLocation());
-        if(newLocation != null) {
-            
-            Location oldLocation = getLocation();
-            
-            //Set new location
-            setLocation(newLocation);
-                
-            //Move to new creature
-            field.place(this, newLocation);
-            field.place(null, oldLocation);
-        }
+		if(findFood(field).isEmpty()) {
+			swim(field);
+		} else {
+			eatFood(findFood(field), field);
+		}
 	}
         
     public abstract void eatFood(List<Location> possibleFood, Field field);

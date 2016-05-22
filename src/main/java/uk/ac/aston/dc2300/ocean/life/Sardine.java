@@ -13,26 +13,27 @@ public class Sardine extends Fish {
 
 	@Override
 	public void act(Field field) {
-		if(findFood(field).isEmpty()) {
-			// move somewhere using super?
-			super.act(field);
-		} else {
-			eatFood(findFood(field), field);
-		}
+		//super.act(field);
 	}
         
-        public void eatFood(List<Location> possibleFood, Field field){
-            Creature creature = null;
-            for(Location location : possibleFood)
-            {
-                creature = field.getObjectAt(location);
+    public void eatFood(List<Location> possibleFood, Field field){
+        Creature creature = null;
+        for(Location location : possibleFood)
+        {
+            creature = field.getObjectAt(location);
+            
+            if(creature.getSpecies() == Species.PLANKTON){
+                creature.setIsAlive(false);
+                this.setFoodLevel(this.getFoodLevel() + 1);
                 
-                if(creature.getSpecies() == Species.PLANKTON){
-                    creature.setIsAlive(false);
-                    this.setLocation(location);
-                    this.setFoodLevel(this.getFoodLevel() + 1);
-                }
+                field.place(null, this.getLocation());
+                this.setLocation(location);
+                field.place(this, location);
+                
+                
+                break;
             }
         }
+    }
 	
 }
