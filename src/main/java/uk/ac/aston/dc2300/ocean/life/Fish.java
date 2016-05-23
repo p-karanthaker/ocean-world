@@ -1,8 +1,6 @@
 package uk.ac.aston.dc2300.ocean.life;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import uk.ac.aston.dc2300.ocean.world.Field;
 import uk.ac.aston.dc2300.ocean.world.Location;
@@ -10,37 +8,11 @@ import uk.ac.aston.dc2300.ocean.world.Location;
 abstract public class Fish extends Creature {
 
 	private int foodLevel;
+	private Species prey;
 	
-	public Fish(Species species, boolean isAgeZero, Location initialLocation) {
+	public Fish(Species species, boolean isAgeZero, Location initialLocation, Species prey) {
 		super(species, isAgeZero, initialLocation);
-		// TODO Auto-generated constructor stub
-	}
-	
-	protected List<Location> findFood(Field field) {
-		List<Location> locations = new ArrayList<Location>();
-		Iterator<Location> adjacent = field.adjacentLocations(getLocation());
-		while(adjacent.hasNext()) {
-			Location next = (Location) adjacent.next();
-			if(field.getObjectAt(next) != null) {
-				locations.add(next);
-			}
-		}
-		return locations;
-	}
-	
-	protected void swim(Field field) {
-		Location newLocation = field.freeAdjacentLocation(getLocation());
-        if(newLocation != null) {
-            
-            Location oldLocation = getLocation();
-            
-            //Set new location
-            setLocation(newLocation);
-                
-            //Move to new creature
-            field.place(this, newLocation);
-            field.place(null, oldLocation);
-        }
+		this.prey = prey;
 	}
 	
 	/**
@@ -56,19 +28,63 @@ abstract public class Fish extends Creature {
 	public void setFoodLevel(int foodLevel) {
 		this.foodLevel = foodLevel;
 	}
+	
+	public Species getPrey() {
+		return prey;
+	}
 
 	@Override
 	public void act(Field field) {
 		// increment age
 		super.act(field);
-		if(findFood(field).isEmpty()) {
-			swim(field);
+		Location food = findFood(field);
+		Location newLocation = field.freeAdjacentLocation(getLocation());
+		if(food != null) {
+			eatFood(food, field);
+		} else if(newLocation != null) {
+			// move
+			move(field, getLocation(), newLocation);
 		} else {
-			eatFood(findFood(field), field);
+			//System.out.println("dead");
 		}
 	}
-        
-    public abstract void eatFood(List<Location> possibleFood, Field field);
 	
+    public void eatFood(Location foodLocation, Field field) {
+        Creature creature = field.getObjectAt(foodLocation);
+        creature.setIsAlive(false);
+        
+        setFoodLevel(this.getFoodLevel() + 1);
+        
+        // take the creatures location
+        move(field, getLocation(), foodLocation);
+    }
+	
+	public Location findFood(Field field) {
+		Iterator<Location> adjacent = field.adjacentLocations(getLocation());
+		while(adjacent.hasNext()) {
+			Location next = (Location) adjacent.next();
+			Creature creature = field.getObjectAt(next);
+			if((creature != null) && (creature.getSpecies().equals(getPrey()))) {
+				return next;
+			}
+		}
+		return null;
+	}
+	
+	
+	/**
+	 * Move the creature to a new location on the field
+	 * @param field
+	 * @param oldLocation
+	 * @param newLocation
+	 */
+	public void move(Field field, Location oldLocation, Location newLocation) {
+        //Set new location
+        setLocation(newLocation);
+        
+        //Move to new position
+        field.place(this, newLocation);
+        field.place(null, oldLocation);
+	}
 	
 }

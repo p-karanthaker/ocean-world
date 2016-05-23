@@ -138,6 +138,12 @@ public class Simulator {
         {
             simulateOneStep();
             view.showStatus(simStep, field);
+            /*try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}*/
         }
     }
     
@@ -145,7 +151,7 @@ public class Simulator {
      * Handles the movement of all the creatures per step in the simulation
      */
     private void simulateOneStep(){
-        Collections.shuffle(creatures);
+        //Collections.shuffle(creatures);
         for(Creature creature : creatures){
         	creature.act(field);
         }
