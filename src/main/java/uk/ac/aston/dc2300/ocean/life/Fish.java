@@ -56,7 +56,8 @@ abstract public class Fish extends Creature {
         setFoodLevel(this.getFoodLevel() + 1);
         
         // take the creatures location
-        move(field, getLocation(), foodLocation);
+        Location oldLocation = getLocation();
+        move(field, oldLocation, foodLocation);
     }
 	
 	public Location findFood(Field field) {
@@ -70,8 +71,7 @@ abstract public class Fish extends Creature {
 		}
 		return null;
 	}
-	
-	
+		
 	/**
 	 * Move the creature to a new location on the field
 	 * @param field

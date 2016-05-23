@@ -10,7 +10,7 @@ public class ModelConstants {
 	
 	/* Creature Parameters */
 		// Plankton
-	public static double CREATION_ODDS_PLANKTON = 0.2f;
+	public static double CREATION_ODDS_PLANKTON = 0.7f;
 	public static double BREEDING_ODDS_PLANKTON = 0.8f;
 	public static int MAXIMUM_AGE_PLANKTON = 100;
 	public static int BREEDING_AGE_PLANKTON = 0;

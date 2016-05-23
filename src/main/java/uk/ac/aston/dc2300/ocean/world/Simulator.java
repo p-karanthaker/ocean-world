@@ -153,7 +153,9 @@ public class Simulator {
     private void simulateOneStep(){
         //Collections.shuffle(creatures);
         for(Creature creature : creatures){
-        	creature.act(field);
+        	if (creature.isAlive()) {
+        		creature.act(field);
+        	}
         }
     }
 }
