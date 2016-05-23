@@ -124,8 +124,7 @@ public class Simulator {
     }
 	
     public void startSimulation() {
-    	creatures.clear();
-    	populate();
+	populate();
         simulate();
 		
     }
@@ -138,12 +137,13 @@ public class Simulator {
         {
             simulateOneStep();
             view.showStatus(simStep, field);
-            /*try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
+            try {
+    Thread.sleep(1000);
+} catch (InterruptedException e) {
+    e.printStackTrace();
+    // handle the exception...        
+    // For example consider calling Thread.currentThread().interrupt(); here.
+}
         }
     }
     
@@ -151,11 +151,9 @@ public class Simulator {
      * Handles the movement of all the creatures per step in the simulation
      */
     private void simulateOneStep(){
-        //Collections.shuffle(creatures);
+        Collections.shuffle(creatures);
         for(Creature creature : creatures){
-        	if (creature.isAlive()) {
-        		creature.act(field);
-        	}
+        	creature.act(field);
         }
     }
 }

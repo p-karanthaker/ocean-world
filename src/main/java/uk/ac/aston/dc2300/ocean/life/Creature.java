@@ -11,7 +11,7 @@ import uk.ac.aston.dc2300.ocean.world.RandomGenerator;
  * @author Karan Thaker
  *
  */
-abstract public class Creature {
+public abstract class Creature {
 	
 	private int age;
 	private Location location;
@@ -38,11 +38,10 @@ abstract public class Creature {
 	}
 	
 	public void act(Field field) {
-		// Increment age for all creatures
 		incrementAge();
 	}
 	
-	private void incrementAge() {
+	public void incrementAge() {
 		setAge(getAge() + 1);
 	}
 	
