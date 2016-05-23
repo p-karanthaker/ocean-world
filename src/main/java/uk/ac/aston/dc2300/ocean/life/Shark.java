@@ -11,7 +11,7 @@ public class Shark extends Fish {
 
 	@Override
 	public void act(Field field) {
-		//super.act(field);
+		super.act(field);
 	}
 	
 }

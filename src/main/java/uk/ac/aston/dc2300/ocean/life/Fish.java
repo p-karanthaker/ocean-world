@@ -40,7 +40,7 @@ abstract public class Fish extends Creature {
 		Location food = findFood(field);
 		Location newLocation = field.freeAdjacentLocation(getLocation());
 		if(food != null) {
-			eatFood(food, field);
+			eatFood(field, food);
 		} else if(newLocation != null) {
 			// move
 			move(field, getLocation(), newLocation);
@@ -49,7 +49,7 @@ abstract public class Fish extends Creature {
 		}
 	}
 	
-    public void eatFood(Location foodLocation, Field field) {
+    public void eatFood(Field field, Location foodLocation) {
         Creature creature = field.getObjectAt(foodLocation);
         creature.setIsAlive(false);
         
