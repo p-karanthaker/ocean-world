@@ -37,18 +37,28 @@ abstract public class Fish extends Creature {
 	public void act(Field field) {
 		// increment age
 		super.act(field);
+		
+		// Find food, also find a new location.
 		Location food = findFood(field);
 		Location newLocation = field.freeAdjacentLocation(getLocation());
+		
+		// First check if food was found...
 		if(food != null) {
 			eatFood(field, food);
+		// otherwise check if a new location was found...
 		} else if(newLocation != null) {
 			// move
 			move(field, getLocation(), newLocation);
 		} else {
-			//System.out.println("dead");
+			// TODO implement dying.
 		}
 	}
 	
+	/**
+	 * Eats the food at the given location.
+	 * @param field
+	 * @param foodLocation
+	 */
     public void eatFood(Field field, Location foodLocation) {
         Creature creature = field.getObjectAt(foodLocation);
         creature.setIsAlive(false);
@@ -60,6 +70,11 @@ abstract public class Fish extends Creature {
         move(field, oldLocation, foodLocation);
     }
 	
+    /**
+     * Try to find edible food.
+     * @param field
+     * @return the first occurrence of an edible food. Otherwise null.
+     */
 	public Location findFood(Field field) {
 		Iterator<Location> adjacent = field.adjacentLocations(getLocation());
 		while(adjacent.hasNext()) {
