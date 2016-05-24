@@ -52,7 +52,10 @@ abstract public class Creature {
 	public void act(Field field) {
 		// Increment age for all creatures
 		incrementAge();
-        //breed(field);
+        breed(field);
+        // TODO dying due to old age
+        // TODO food levels
+        // TODO add babies to the list
 	}
         
         private void breed(Field field)
@@ -93,8 +96,7 @@ abstract public class Creature {
             //If there is space for the baby make one
             if(babyLocation != null){
                Creature baby = CreatureFactory.getCreature(this.getSpecies(), true, babyLocation);
-               
-            field.place(baby, babyLocation);
+               field.place(baby, babyLocation);
             }
         }
           
