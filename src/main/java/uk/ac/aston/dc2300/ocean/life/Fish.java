@@ -35,6 +35,7 @@ abstract public class Fish extends Creature {
 
 	@Override
 	public void act(Field field) {
+            if(this.isAlive()){
 		// increment age
 		super.act(field);
 		
@@ -50,8 +51,10 @@ abstract public class Fish extends Creature {
 			// move
 			move(field, getLocation(), newLocation);
 		} else {
-			// TODO implement dying.
+			// If the fish can't move it dies of over-crowding
+                        this.setIsAlive(false);
 		}
+            }
 	}
 	
 	/**

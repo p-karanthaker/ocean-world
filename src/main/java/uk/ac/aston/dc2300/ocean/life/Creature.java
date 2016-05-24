@@ -1,5 +1,7 @@
 package uk.ac.aston.dc2300.ocean.life;
 
+import java.util.Random;
+import uk.ac.aston.dc2300.ocean.world.CreatureFactory;
 import uk.ac.aston.dc2300.ocean.world.Field;
 import uk.ac.aston.dc2300.ocean.world.Location;
 import uk.ac.aston.dc2300.ocean.world.ModelConstants;
@@ -51,12 +53,57 @@ abstract public class Creature {
 		// Increment age for all creatures
 		if (getAge()+1 < getMaxAge()) {
 			incrementAge();
+                        breed(field);
 		} else {
 			setIsAlive(false);
 		}
 		return;
 	}
+        
+        private void breed(Field field)
+        {
+            RandomGenerator.initialiseWithSeed(ModelConstants.RNG_SEED);
+            
+            Random rand = RandomGenerator.getRandom();
+            
+            double randomNumber = rand.nextDouble();
+            double birthProb = 0;
+           
+		switch (this.getSpecies() ) {
+			case PLANKTON:
+				birthProb = ModelConstants.BREEDING_AGE_PLANKTON;
+				break;
+			case SARDINE:
+				birthProb = ModelConstants.BREEDING_AGE_SARDINE;
+				break;
+			case SHARK:
+				birthProb = ModelConstants.BREEDING_AGE_SHARK;
+				break;
+			default:
+				return;
+		} 
+                
+                if(randomNumber > birthProb){
+                    //System.out.println("BABY: " + "Species: " + this.getSpecies() + " " + randomNumber);
+                    giveBirth(field);
+                }
+        }
 	
+        private void giveBirth(Field field){
+            Location babyLocation = null;
+            
+            //Try to get potential baby location
+            babyLocation = field.freeAdjacentLocation(this.getLocation());
+            
+            //If there is space for the baby make one
+            if(babyLocation != null){
+               Creature baby = CreatureFactory.getCreature(this.getSpecies(), true, babyLocation);
+               
+            field.place(baby, babyLocation);
+            }
+        }
+          
+        
 	private void incrementAge() {
 		setAge(getAge() + 1);
 	}
