@@ -51,13 +51,8 @@ abstract public class Creature {
 	
 	public void act(Field field) {
 		// Increment age for all creatures
-		if (getAge()+1 < getMaxAge()) {
-			incrementAge();
-                        breed(field);
-		} else {
-			setIsAlive(false);
-		}
-		return;
+		incrementAge();
+        //breed(field);
 	}
         
         private void breed(Field field)
@@ -83,7 +78,7 @@ abstract public class Creature {
 				return;
 		} 
                 
-                if(randomNumber > birthProb){
+                if(randomNumber <= birthProb){
                     //System.out.println("BABY: " + "Species: " + this.getSpecies() + " " + randomNumber);
                     giveBirth(field);
                 }

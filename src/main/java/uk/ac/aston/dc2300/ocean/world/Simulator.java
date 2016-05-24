@@ -137,12 +137,12 @@ public class Simulator {
         {
             simulateOneStep();
             view.showStatus(simStep, field);
-            /*try {
+            try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}*/
+			}
         }
     }
     
@@ -154,8 +154,6 @@ public class Simulator {
         for(Creature creature : creatures){
         	if (creature.isAlive()) {
         		creature.act(field);
-        	} else {
-        		field.place(null, creature.getLocation());
         	}
         }
     }
