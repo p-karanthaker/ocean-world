@@ -127,7 +127,6 @@ public class Simulator {
     	creatures.clear();
     	populate();
         simulate();
-		
     }
        
     /**
@@ -151,10 +150,12 @@ public class Simulator {
      * Handles the movement of all the creatures per step in the simulation
      */
     private void simulateOneStep(){
-        Collections.shuffle(creatures);
+        //Collections.shuffle(creatures);
         for(Creature creature : creatures){
         	if (creature.isAlive()) {
         		creature.act(field);
+        	} else {
+        		field.place(null, creature.getLocation());
         	}
         }
     }

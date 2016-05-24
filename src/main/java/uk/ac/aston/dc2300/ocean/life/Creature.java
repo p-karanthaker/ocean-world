@@ -16,6 +16,7 @@ abstract public class Creature {
 	private int age;
 	private Location location;
 	private boolean isAlive;
+	private int maxAge;
 	
 	private Species SPECIES;
 	
@@ -25,13 +26,19 @@ abstract public class Creature {
 		switch (species) {
 			case PLANKTON:
 				SPECIES = species;
-				this.age = isAgeZero ? 0 : RandomGenerator.getRandom().nextInt(ModelConstants.MAXIMUM_AGE_PLANKTON + 1);
+				maxAge = ModelConstants.MAXIMUM_AGE_PLANKTON;
+				this.age = isAgeZero ? 0 : RandomGenerator.getRandom().nextInt(getMaxAge() + 1);
+				break;
 			case SARDINE:
 				SPECIES = species;
-				this.age = isAgeZero ? 0 : RandomGenerator.getRandom().nextInt(ModelConstants.MAXIMUM_AGE_SARDINE + 1);
+				maxAge = ModelConstants.MAXIMUM_AGE_SARDINE;
+				this.age = isAgeZero ? 0 : RandomGenerator.getRandom().nextInt(getMaxAge() + 1);
+				break;
 			case SHARK:
 				SPECIES = species;
-				this.age = isAgeZero ? 0 : RandomGenerator.getRandom().nextInt(ModelConstants.MAXIMUM_AGE_SHARK + 1);
+				maxAge = ModelConstants.MAXIMUM_AGE_SHARK;
+				this.age = isAgeZero ? 0 : RandomGenerator.getRandom().nextInt(getMaxAge() + 1);
+				break;
 			default:
 				return;
 		}
@@ -39,7 +46,12 @@ abstract public class Creature {
 	
 	public void act(Field field) {
 		// Increment age for all creatures
-		incrementAge();
+		if (getAge()+1 < getMaxAge()) {
+			incrementAge();
+		} else {
+			setIsAlive(false);
+		}
+		return;
 	}
 	
 	private void incrementAge() {
@@ -47,6 +59,10 @@ abstract public class Creature {
 	}
 	
 	// Getters and Setters
+	
+	public int getMaxAge() {
+		return maxAge;
+	}
 	
 	/**
 	 * @return the age of the Creature
