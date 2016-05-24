@@ -63,7 +63,7 @@ abstract public class Fish extends Creature {
         Creature creature = field.getObjectAt(foodLocation);
         creature.setIsAlive(false);
         
-        setFoodLevel(this.getFoodLevel() + 1);
+        setFoodLevel(this.getFoodLevel() + getNutritionalValue());
         
         // take the creatures location
         Location oldLocation = getLocation();

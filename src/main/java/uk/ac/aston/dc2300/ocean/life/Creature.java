@@ -17,6 +17,7 @@ abstract public class Creature {
 	private Location location;
 	private boolean isAlive;
 	private int maxAge;
+	private int nutritionalValue = 0;
 	
 	private Species SPECIES;
 	
@@ -27,11 +28,13 @@ abstract public class Creature {
 			case PLANKTON:
 				SPECIES = species;
 				maxAge = ModelConstants.MAXIMUM_AGE_PLANKTON;
+				nutritionalValue = ModelConstants.NUTRITIONAL_VALUE_PLANKTON;
 				this.age = isAgeZero ? 0 : RandomGenerator.getRandom().nextInt(getMaxAge() + 1);
 				break;
 			case SARDINE:
 				SPECIES = species;
 				maxAge = ModelConstants.MAXIMUM_AGE_SARDINE;
+				nutritionalValue = ModelConstants.NUTRITIONAL_VALUE_SARDINE;
 				this.age = isAgeZero ? 0 : RandomGenerator.getRandom().nextInt(getMaxAge() + 1);
 				break;
 			case SHARK:
@@ -59,6 +62,10 @@ abstract public class Creature {
 	}
 	
 	// Getters and Setters
+	
+	public int getNutritionalValue() {
+		return nutritionalValue;
+	}
 	
 	public int getMaxAge() {
 		return maxAge;
