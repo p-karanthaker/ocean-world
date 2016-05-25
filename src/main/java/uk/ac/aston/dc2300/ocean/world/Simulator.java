@@ -141,7 +141,6 @@ public class Simulator {
         {
             simulateOneStep();
             view.showStatus(simStep, field);
-            System.out.println(simStep);
             /*try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
@@ -164,6 +163,9 @@ public class Simulator {
         		if(baby != null) {
         			it.add(baby);
         		}
+        	} else if (!creature.isAlive()) {
+        		// remove dead creatures for memory efficiency
+        		it.remove();
         	}
         }
     }
