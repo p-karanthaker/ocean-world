@@ -58,47 +58,48 @@ abstract public class Creature {
         // TODO add babies to the list
 	}
         
-        private void breed(Field field)
-        {
-            RandomGenerator.initialiseWithSeed(ModelConstants.RNG_SEED);
-            
-            Random rand = RandomGenerator.getRandom();
-            
-            double randomNumber = rand.nextDouble();
-            double birthProb = 0;
-           
-		switch (this.getSpecies() ) {
+    private void breed(Field field) {
+        Random rand = RandomGenerator.getRandom();
+        
+        double randomNumber = rand.nextDouble();
+        double birthProb = 0;
+        int ageOfConsent = 0;
+       
+		switch (this.getSpecies()) {
 			case PLANKTON:
-				birthProb = ModelConstants.BREEDING_AGE_PLANKTON;
+				birthProb = ModelConstants.BREEDING_ODDS_PLANKTON;
+				ageOfConsent = ModelConstants.BREEDING_AGE_PLANKTON;
 				break;
 			case SARDINE:
-				birthProb = ModelConstants.BREEDING_AGE_SARDINE;
+				birthProb = ModelConstants.BREEDING_ODDS_SARDINE;
+				ageOfConsent = ModelConstants.BREEDING_AGE_SARDINE;
 				break;
 			case SHARK:
-				birthProb = ModelConstants.BREEDING_AGE_SHARK;
+				birthProb = ModelConstants.BREEDING_ODDS_SHARK;
+				ageOfConsent = ModelConstants.BREEDING_AGE_SHARK;
 				break;
 			default:
 				return;
 		} 
-                
-                if(randomNumber <= birthProb){
-                    //System.out.println("BABY: " + "Species: " + this.getSpecies() + " " + randomNumber);
-                    giveBirth(field);
-                }
+        
+        if((getAge() >= ageOfConsent) && (randomNumber <= birthProb)){
+            //System.out.println("BABY: " + "Species: " + this.getSpecies() + " " + randomNumber);
+            giveBirth(field);
         }
-	
-        private void giveBirth(Field field){
-            Location babyLocation = null;
-            
-            //Try to get potential baby location
-            babyLocation = field.freeAdjacentLocation(this.getLocation());
-            
-            //If there is space for the baby make one
-            if(babyLocation != null){
-               Creature baby = CreatureFactory.getCreature(this.getSpecies(), true, babyLocation);
-               field.place(baby, babyLocation);
-            }
+    }
+
+    private void giveBirth(Field field){
+        Location babyLocation = null;
+        
+        //Try to get potential baby location
+        babyLocation = field.freeAdjacentLocation(this.getLocation());
+        
+        //If there is space for the baby make one
+        if(babyLocation != null){
+           Creature baby = CreatureFactory.getCreature(this.getSpecies(), true, babyLocation);
+           field.place(baby, babyLocation);
         }
+    }
           
         
 	private void incrementAge() {
