@@ -1,12 +1,12 @@
 package uk.ac.aston.dc2300.ocean.life;
 
 import java.util.Random;
+
 import uk.ac.aston.dc2300.ocean.world.CreatureFactory;
 import uk.ac.aston.dc2300.ocean.world.Field;
 import uk.ac.aston.dc2300.ocean.world.Location;
 import uk.ac.aston.dc2300.ocean.world.ModelConstants;
 import uk.ac.aston.dc2300.ocean.world.RandomGenerator;
-import uk.ac.aston.dc2300.ocean.world.Simulator;
 
 /**
  * Creature class.
@@ -53,10 +53,7 @@ abstract public class Creature {
 	public void act(Field field) {
 		// Increment age for all creatures
 		incrementAge();
-        //breed(field);
-        // TODO dying due to old age
         // TODO food levels
-        // TODO add babies to the list
 	}
         
     public Creature breed(Field field) {

@@ -77,10 +77,11 @@ abstract public class Fish extends Creature {
      * @param field
      * @return the first occurrence of an edible food. Otherwise null.
      */
+	@SuppressWarnings("unchecked")
 	public Location findFood(Field field) {
 		Iterator<Location> adjacent = field.adjacentLocations(getLocation());
 		while(adjacent.hasNext()) {
-			Location next = (Location) adjacent.next();
+			Location next = adjacent.next();
 			Creature creature = field.getObjectAt(next);
 			if((creature != null) && (creature.getSpecies().equals(getPrey()))) {
 				return next;

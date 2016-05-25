@@ -2,6 +2,7 @@ package uk.ac.aston.dc2300.ocean.world;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
@@ -154,14 +155,19 @@ public class Simulator {
      * Handles the movement of all the creatures per step in the simulation
      */
     private void simulateOneStep(){
-        //Collections.shuffle(creatures);
+        Collections.shuffle(creatures);
         for(ListIterator<Creature> it = creatures.listIterator(); it.hasNext();){
         	Creature creature = it.next();
         	if (creature.isAlive()) {
-        		creature.act(field);
-        		Creature baby = creature.breed(field);
-        		if(baby != null) {
-        			it.add(baby);
+        		if (creature.getAge() < creature.getMaxAge()) {
+	        		creature.act(field);
+	        		Creature baby = creature.breed(field);
+	        		if(baby != null) {
+	        			it.add(baby);
+	        		}
+        		} else {
+        			creature.setIsAlive(false);
+        			field.place(null, creature.getLocation());
         		}
         	} else if (!creature.isAlive()) {
         		// remove dead creatures for memory efficiency
