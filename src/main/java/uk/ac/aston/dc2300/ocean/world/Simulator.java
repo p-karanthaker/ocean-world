@@ -2,15 +2,19 @@ package uk.ac.aston.dc2300.ocean.world;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Random;
 
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import uk.ac.aston.dc2300.ocean.life.*;
+import uk.ac.aston.dc2300.ocean.life.Creature;
+import uk.ac.aston.dc2300.ocean.life.Plankton;
+import uk.ac.aston.dc2300.ocean.life.Sardine;
+import uk.ac.aston.dc2300.ocean.life.Shark;
+import uk.ac.aston.dc2300.ocean.life.Species;
 
 public class Simulator {
 
@@ -137,6 +141,7 @@ public class Simulator {
         {
             simulateOneStep();
             view.showStatus(simStep, field);
+            System.out.println(simStep);
             /*try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
@@ -151,9 +156,14 @@ public class Simulator {
      */
     private void simulateOneStep(){
         //Collections.shuffle(creatures);
-        for(Creature creature : creatures){
+        for(ListIterator<Creature> it = creatures.listIterator(); it.hasNext();){
+        	Creature creature = it.next();
         	if (creature.isAlive()) {
         		creature.act(field);
+        		Creature baby = creature.breed(field);
+        		if(baby != null) {
+        			it.add(baby);
+        		}
         	}
         }
     }

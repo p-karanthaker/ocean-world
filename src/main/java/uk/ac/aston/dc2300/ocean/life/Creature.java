@@ -6,6 +6,7 @@ import uk.ac.aston.dc2300.ocean.world.Field;
 import uk.ac.aston.dc2300.ocean.world.Location;
 import uk.ac.aston.dc2300.ocean.world.ModelConstants;
 import uk.ac.aston.dc2300.ocean.world.RandomGenerator;
+import uk.ac.aston.dc2300.ocean.world.Simulator;
 
 /**
  * Creature class.
@@ -52,13 +53,13 @@ abstract public class Creature {
 	public void act(Field field) {
 		// Increment age for all creatures
 		incrementAge();
-        breed(field);
+        //breed(field);
         // TODO dying due to old age
         // TODO food levels
         // TODO add babies to the list
 	}
         
-    private void breed(Field field) {
+    public Creature breed(Field field) {
         Random rand = RandomGenerator.getRandom();
         
         double randomNumber = rand.nextDouble();
@@ -79,16 +80,17 @@ abstract public class Creature {
 				ageOfConsent = ModelConstants.BREEDING_AGE_SHARK;
 				break;
 			default:
-				return;
+				break;
 		} 
         
         if((getAge() >= ageOfConsent) && (randomNumber <= birthProb)){
             //System.out.println("BABY: " + "Species: " + this.getSpecies() + " " + randomNumber);
-            giveBirth(field);
+            return giveBirth(field);
         }
+		return null;
     }
 
-    private void giveBirth(Field field){
+    private Creature giveBirth(Field field){
         Location babyLocation = null;
         
         //Try to get potential baby location
@@ -98,7 +100,9 @@ abstract public class Creature {
         if(babyLocation != null){
            Creature baby = CreatureFactory.getCreature(this.getSpecies(), true, babyLocation);
            field.place(baby, babyLocation);
+           return baby;
         }
+		return null;
     }
           
         
