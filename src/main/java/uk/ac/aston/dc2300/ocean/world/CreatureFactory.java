@@ -12,6 +12,12 @@ import uk.ac.aston.dc2300.ocean.life.*;
  */
 abstract public class CreatureFactory {
     
+        /**
+	 * Factory for creating creatures based on the species passed in
+	 * @param species the species type of creature
+         * @param isAgeZero if it is a creature as a result of breeding
+         * @param initialLocation its first location
+	 */
     public static Creature getCreature(Species species, boolean isAgeZero, Location initialLocation){
     	switch (species) {
 	    	case PLANKTON:
