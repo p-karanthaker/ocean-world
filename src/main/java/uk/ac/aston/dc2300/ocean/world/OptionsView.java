@@ -13,14 +13,45 @@ import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
+/**
+ * OptionView sets up a JDialog in a GridLayout and displays
+ * all JSpinner items which allow the user to edit the ModelConstants
+ * in a friendly way.
+ * 
+ * @author Karan Thaker / Orry Edwards
+ *
+ */
 public class OptionsView extends JDialog {
 	
+	/**
+	 * Auto generated serialVersionUID
+	 */
 	private static final long serialVersionUID = -3474651107847519005L;
+	
+	/**
+	 * List to hold all JLabel objects for each ModelConstants field
+	 */
 	private List<JLabel> labels = new ArrayList<JLabel>();
+	
+	/**
+	 * List to hold all JSpinner objects which allow editing to all ModelConstants fields
+	 */
 	private List<JSpinner> spinners = new ArrayList<JSpinner>();
+	
+	/**
+	 * JButton to confirm/save configuration settings
+	 */
 	private JButton buttonOK = new JButton("OK");
+	
+	/**
+	 * JButton to cancel out of the configuration
+	 */
 	private JButton buttonCancel = new JButton("Cancel");
 	
+	/**
+	 * Constructor to create the OptionsView object.
+	 * Sets the layout, adds all items, and configures JDialog settings.
+	 */
 	public OptionsView() {
 		setTitle("Simulator Options");
 		
@@ -46,6 +77,10 @@ public class OptionsView extends JDialog {
 		setVisible(true);
 	}
 	
+	/**
+	 * Sets listeners for the JButtons
+	 * @param frame the frame in which to pop up message dialogs
+	 */
 	private void setButtonListeners(final JDialog frame) {
 		buttonOK.addActionListener(new ActionListener() {
 			
@@ -66,6 +101,9 @@ public class OptionsView extends JDialog {
 		});
 	}
 	
+	/**
+	 * Sets the configuration fields in ModelConstants with new values input by user
+	 */
 	private void setConfigParams() {
 		ModelConstants.SIMULATION_LENGTH = (Integer) spinners.get(0).getValue();
 		ModelConstants.RNG_SEED = (Integer) spinners.get(1).getValue();
@@ -87,6 +125,9 @@ public class OptionsView extends JDialog {
 		ModelConstants.NUTRITIONAL_VALUE_PLANKTON = (Integer) spinners.get(17).getValue();
 	}
 	
+	/**
+	 * Create each JLabel and JSpinner object and add it to the List
+	 */
 	public void buildComponents() {
 		JLabel lblSimulatorLength = new JLabel("Simulation Length"); 
 		labels.add(lblSimulatorLength);
@@ -146,23 +187,22 @@ public class OptionsView extends JDialog {
 		labels.add(lblPlanktonNutritionalValue);
 				
 		
-		// TODO add in SpinnerModels for default,min,max,step values
 		JSpinner spinSimulationLenth = new JSpinner(new SpinnerNumberModel(ModelConstants.SIMULATION_LENGTH, 100, 10000, 1));
 		spinners.add(spinSimulationLenth);
 		
 		JSpinner spinRNGSeed = new JSpinner(new SpinnerNumberModel(ModelConstants.RNG_SEED, 1, 1000, 1)); 
 		spinners.add(spinRNGSeed);
 		
-		JSpinner spinOceanWidth = new JSpinner(new SpinnerNumberModel(ModelConstants.OCEAN_WIDTH, 50, 500, 10)); 
+		JSpinner spinOceanWidth = new JSpinner(new SpinnerNumberModel(ModelConstants.OCEAN_WIDTH, 50, 500, 5)); 
 		spinners.add(spinOceanWidth);
 		
-		JSpinner spinOceanDepth = new JSpinner(new SpinnerNumberModel(ModelConstants.OCEAN_DEPTH, 50, 500, 10)); 
+		JSpinner spinOceanDepth = new JSpinner(new SpinnerNumberModel(ModelConstants.OCEAN_DEPTH, 50, 500, 5)); 
 		spinners.add(spinOceanDepth);
 				
-		JSpinner spinSharkCreationOdds = new JSpinner(new SpinnerNumberModel(ModelConstants.CREATION_ODDS_SHARK, 0.05, 1, 0.05));
+		JSpinner spinSharkCreationOdds = new JSpinner(new SpinnerNumberModel(ModelConstants.CREATION_ODDS_SHARK, 0.01, 1, 0.01));
 		spinners.add(spinSharkCreationOdds);
 		
-		JSpinner spinSharkBreedingOdds = new JSpinner(new SpinnerNumberModel(ModelConstants.BREEDING_ODDS_SHARK, 0.05, 1, 0.05)); 
+		JSpinner spinSharkBreedingOdds = new JSpinner(new SpinnerNumberModel(ModelConstants.BREEDING_ODDS_SHARK, 0.01, 1, 0.01)); 
 		spinners.add(spinSharkBreedingOdds);
 		
 		JSpinner spinSharkMaximumAge = new JSpinner(new SpinnerNumberModel(ModelConstants.MAXIMUM_AGE_SHARK, 0, null, 1)); 
@@ -171,10 +211,10 @@ public class OptionsView extends JDialog {
 		JSpinner spinSharkBreedingAge = new JSpinner(new SpinnerNumberModel(ModelConstants.BREEDING_AGE_SHARK, 0, null, 1)); 
 		spinners.add(spinSharkBreedingAge);
 				
-		JSpinner spinSardineCreationOdds = new JSpinner(new SpinnerNumberModel(ModelConstants.CREATION_ODDS_SARDINE, 0.05, 1, 0.05)); 
+		JSpinner spinSardineCreationOdds = new JSpinner(new SpinnerNumberModel(ModelConstants.CREATION_ODDS_SARDINE, 0.01, 1, 0.01)); 
 		spinners.add(spinSardineCreationOdds);
 		
-		JSpinner spinSardineBreedingOdds = new JSpinner(new SpinnerNumberModel(ModelConstants.BREEDING_ODDS_SARDINE, 0.05, 1, 0.05)); 
+		JSpinner spinSardineBreedingOdds = new JSpinner(new SpinnerNumberModel(ModelConstants.BREEDING_ODDS_SARDINE, 0.01, 1, 0.01)); 
 		spinners.add(spinSardineBreedingOdds);
 		
 		JSpinner spinSardineMaximumAge = new JSpinner(new SpinnerNumberModel(ModelConstants.MAXIMUM_AGE_SARDINE, 0, null, 1));
@@ -186,10 +226,10 @@ public class OptionsView extends JDialog {
 		JSpinner spinSardineNutritionalValue = new JSpinner(new SpinnerNumberModel(ModelConstants.NUTRITIONAL_VALUE_SARDINE, 0, null, 1));
 		spinners.add(spinSardineNutritionalValue);
 		
-		JSpinner spinPlanktonCreationOdds = new JSpinner(new SpinnerNumberModel(ModelConstants.CREATION_ODDS_PLANKTON, 0.05, 1, 0.05));
+		JSpinner spinPlanktonCreationOdds = new JSpinner(new SpinnerNumberModel(ModelConstants.CREATION_ODDS_PLANKTON, 0.01, 1, 0.01));
 		spinners.add(spinPlanktonCreationOdds);
 		
-		JSpinner spinPlanktonBreedingOdds = new JSpinner(new SpinnerNumberModel(ModelConstants.BREEDING_ODDS_PLANKTON, 0.05, 1, 0.05)); 
+		JSpinner spinPlanktonBreedingOdds = new JSpinner(new SpinnerNumberModel(ModelConstants.BREEDING_ODDS_PLANKTON, 0.01, 1, 0.01)); 
 		spinners.add(spinPlanktonBreedingOdds);
 		
 		JSpinner spinPlanktonMaximumAge = new JSpinner(new SpinnerNumberModel(ModelConstants.MAXIMUM_AGE_PLANKTON, 0, null, 1));
@@ -200,8 +240,6 @@ public class OptionsView extends JDialog {
 		
 		JSpinner spinPlanktonNutritionalValue = new JSpinner(new SpinnerNumberModel(ModelConstants.NUTRITIONAL_VALUE_PLANKTON, 0, null, 1));
 		spinners.add(spinPlanktonNutritionalValue);
-		
-		
 	}
 	
 }
