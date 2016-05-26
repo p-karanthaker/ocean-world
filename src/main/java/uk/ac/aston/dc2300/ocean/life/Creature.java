@@ -20,9 +20,10 @@ abstract public class Creature {
 	private Location location;
 	private boolean alive;
 	
-	private Species SPECIES;
+	private Species species;
 	
 	public Creature(Species species, boolean isBaby, Location initialLocation) {
+		this.species = species;
 		this.location = initialLocation;
 		this.alive = true;
 		this.age = isBaby ? 0 : random.nextInt(getMaxAge() + 1);
@@ -122,7 +123,7 @@ abstract public class Creature {
 	 * @return the SPECIES of the Creature
 	 */
 	public Species getSpecies() {
-		return SPECIES;
+		return species;
 	}
 
 	/**
