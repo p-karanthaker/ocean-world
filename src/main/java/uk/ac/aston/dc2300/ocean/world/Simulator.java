@@ -131,7 +131,7 @@ public class Simulator {
      * Simulates the ocean field and all activity for the pre-defined number of steps
      */
     public void simulate(int simulationLength) {
-        while(simulationStep <= simulationLength)
+        while(simulationStep <= simulationLength && view.isViable(field))
         {
             simulateOneStep();
             simulationStep++;
