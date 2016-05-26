@@ -12,7 +12,6 @@ public class Plankton extends Creature {
 	@Override
 	public void act(Field field) {
 		super.act(field);
-		// reproduce
 	}
 	
 }

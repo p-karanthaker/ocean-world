@@ -53,7 +53,6 @@ abstract public class Creature {
 	public void act(Field field) {
 		// Increment age for all creatures
 		incrementAge();
-        // TODO food levels
 	}
         
     public Creature breed(Field field) {

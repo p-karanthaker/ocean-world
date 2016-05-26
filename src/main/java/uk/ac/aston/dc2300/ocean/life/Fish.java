@@ -13,6 +13,7 @@ abstract public class Fish extends Creature {
 	public Fish(Species species, boolean isAgeZero, Location initialLocation, Species prey) {
 		super(species, isAgeZero, initialLocation);
 		this.prey = prey;
+		this.foodLevel = 100;
 	}
 	
 	/**
@@ -37,22 +38,28 @@ abstract public class Fish extends Creature {
 	public void act(Field field) {
 		// increment age
 		super.act(field);
+		setFoodLevel(getFoodLevel() - 8);
 		
-		// Find food, also find a new location.
-		Location food = findFood(field);
-		Location newLocation = field.freeAdjacentLocation(getLocation());
-		
-		// First check if food was found...
-		if(food != null) {
-			eatFood(field, food);
-		// otherwise check if a new location was found...
-		} else if(newLocation != null) {
-			// move
-			move(field, getLocation(), newLocation);
+		if (getFoodLevel() > 0) {
+			// Find food, also find a new location.
+			Location food = findFood(field);
+			Location newLocation = field.freeAdjacentLocation(getLocation());
+			
+			// First check if food was found...
+			if(food != null) {
+				eatFood(field, food);
+			// otherwise check if a new location was found...
+			} else if(newLocation != null) {
+				// move
+				move(field, getLocation(), newLocation);
+			} else {
+				// If the fish can't move it dies of over-crowding
+	            this.setIsAlive(false);
+	            field.place(null, getLocation());
+			}
 		} else {
-			// If the fish can't move it dies of over-crowding
-            this.setIsAlive(false);
-            field.place(null, getLocation());
+			this.setIsAlive(false);
+			field.place(null, getLocation());
 		}
 	}
 	
@@ -65,7 +72,7 @@ abstract public class Fish extends Creature {
         Creature creature = field.getObjectAt(foodLocation);
         creature.setIsAlive(false);
         
-        setFoodLevel(this.getFoodLevel() + getNutritionalValue());
+        setFoodLevel(this.getFoodLevel() + creature.getNutritionalValue());
         
         // take the creatures location
         Location oldLocation = getLocation();

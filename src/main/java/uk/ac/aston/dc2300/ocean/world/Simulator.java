@@ -60,9 +60,9 @@ public class Simulator {
 	}
 	
 	public void init(int width, int depth) {
-		field = new Field(ModelConstants.OCEAN_WIDTH, ModelConstants.OCEAN_DEPTH);
+		field = new Field(ModelConstants.OCEAN_DEPTH, ModelConstants.OCEAN_WIDTH);
 
-		view = new SimulatorView(ModelConstants.OCEAN_WIDTH, ModelConstants.OCEAN_DEPTH);
+		view = new SimulatorView(ModelConstants.OCEAN_DEPTH, ModelConstants.OCEAN_WIDTH);
 		view.setColor(Plankton.class, Color.GREEN);
 		view.setColor(Sardine.class, Color.DARK_GRAY);
 		view.setColor(Shark.class, Color.CYAN);
