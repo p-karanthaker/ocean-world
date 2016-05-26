@@ -34,5 +34,10 @@ public class Sardine extends Fish {
 	public int getNutritionalValue() {
 		return ModelConstants.NUTRITIONAL_VALUE_PLANKTON;
 	}
+
+	@Override
+	public int getPreyNutritionalValue() {
+		return ModelConstants.NUTRITIONAL_VALUE_PLANKTON;
+	}
 	
 }

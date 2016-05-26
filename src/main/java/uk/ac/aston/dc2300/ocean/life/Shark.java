@@ -34,5 +34,10 @@ public class Shark extends Fish {
 	public int getNutritionalValue() {
 		return 0;
 	}
+
+	@Override
+	public int getPreyNutritionalValue() {
+		return ModelConstants.NUTRITIONAL_VALUE_SARDINE;
+	}
 	
 }
