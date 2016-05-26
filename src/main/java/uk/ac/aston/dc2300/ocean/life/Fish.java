@@ -10,12 +10,26 @@ abstract public class Fish extends Creature {
 	private int foodLevel;
 	private Species prey;
 	
+        /**
+	 * Provides a species type and information on what this creature eats and 
+         * its hunger level
+         * location
+	 * @param species the species type of creature
+         * @param isAgeZero if the age of the creature is to start at 0
+         * @param initialLocation its first location
+         * @param prey the type of creature this creature can eat
+	 */
 	public Fish(Species species, boolean isAgeZero, Location initialLocation, Species prey) {
 		super(species, isAgeZero, initialLocation);
 		this.prey = prey;
 		this.foodLevel = getPreyNutritionalValue();
 	}
 	
+        
+        /**
+	 * @return the value gain in food level from consuming this creatures 
+         * prey
+	 */
 	abstract public int getPreyNutritionalValue();
 	
 	/**
@@ -26,16 +40,23 @@ abstract public class Fish extends Creature {
 	}
 
 	/**
-	 * @param foodLevel the foodLevel to set
+	 * decreases food level by 1
 	 */
 	public void decreaseFoodLevel() {
 		this.foodLevel--;
 	}
 	
+        /**
+	 * @return the Species of this object
+	 */
 	public Species getPrey() {
 		return prey;
 	}
 
+         /**
+         * Performs all the actions of the creatures such as swim, eat and breed
+         * @param field the current 2D array representing the environment
+         */
 	@Override
 	public void act(Field field) {
 		// increment age
@@ -50,16 +71,18 @@ abstract public class Fish extends Creature {
 			// First check if food was found...
 			if(food != null) {
 				eatFood(field, food);
-			// otherwise check if a new location was found...
+                            // otherwise check if a new location was found...
 			} else if(newLocation != null) {
 				// move
-				move(field, getLocation(), newLocation);
+                            move(field, getLocation(), newLocation);
 			} else {
-				// If the fish can't move it dies of over-crowding
-	            this.setNotAlive();
-	            field.place(null, getLocation());
+                            // If the fish can't move it dies of over-crowding
+                            this.setNotAlive();
+                            field.place(null, getLocation());
 			}
-		} else {
+		}
+                //If the food level of the fish is 0 or below it dies and needs to be removed
+                else {
 			this.setNotAlive();
 			field.place(null, getLocation());
 		}
@@ -67,13 +90,20 @@ abstract public class Fish extends Creature {
 	
 	/**
 	 * Eats the food at the given location.
-	 * @param field
-	 * @param foodLocation
+	 * @param field the current 2D array representing the environment
+	 * @param foodLocation the location of the adjacent creature this creature 
+         * can eat
 	 */
     public void eatFood(Field field, Location foodLocation) {
+        
+        //get the prey
         Creature creature = field.getObjectAt(foodLocation);
+        
+        //mark the prey as dead as it is being eaten
         creature.setNotAlive();
         
+        //increase the food level of this creature by the nutrional value of what
+        //just ate
         this.foodLevel += creature.getNutritionalValue();
         
         // take the creatures location
@@ -83,7 +113,7 @@ abstract public class Fish extends Creature {
 	
     /**
      * Try to find edible food.
-     * @param field
+     * @param field the current 2D array representing the environment
      * @return the first occurrence of an edible food. Otherwise null.
      */
 	@SuppressWarnings("unchecked")
@@ -101,9 +131,9 @@ abstract public class Fish extends Creature {
 		
 	/**
 	 * Move the creature to a new location on the field
-	 * @param field
-	 * @param oldLocation
-	 * @param newLocation
+	 * @param field the current 2D array representing the environment
+	 * @param oldLocation the location the creature is moving from
+	 * @param newLocation the location the creature is moving to
 	 */
 	public void move(Field field, Location oldLocation, Location newLocation) {
         //Set new location
