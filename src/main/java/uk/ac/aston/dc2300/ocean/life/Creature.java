@@ -5,7 +5,6 @@ import java.util.Random;
 import uk.ac.aston.dc2300.ocean.world.CreatureFactory;
 import uk.ac.aston.dc2300.ocean.world.Field;
 import uk.ac.aston.dc2300.ocean.world.Location;
-import uk.ac.aston.dc2300.ocean.world.ModelConstants;
 import uk.ac.aston.dc2300.ocean.world.RandomGenerator;
 
 /**
@@ -15,77 +14,52 @@ import uk.ac.aston.dc2300.ocean.world.RandomGenerator;
  *
  */
 abstract public class Creature {
+	private Random random = RandomGenerator.getRandom();
 	
 	private int age;
 	private Location location;
-	private boolean isAlive;
-	private int maxAge;
-	private int nutritionalValue = 0;
+	private boolean alive;
 	
 	private Species SPECIES;
 	
-	public Creature(Species species, boolean isAgeZero, Location initialLocation) {
+	public Creature(Species species, boolean isBaby, Location initialLocation) {
 		this.location = initialLocation;
-		this.setIsAlive(true);
-		switch (species) {
-			case PLANKTON:
-				SPECIES = species;
-				maxAge = ModelConstants.MAXIMUM_AGE_PLANKTON;
-				nutritionalValue = ModelConstants.NUTRITIONAL_VALUE_PLANKTON;
-				this.age = isAgeZero ? 0 : RandomGenerator.getRandom().nextInt(getMaxAge() + 1);
-				break;
-			case SARDINE:
-				SPECIES = species;
-				maxAge = ModelConstants.MAXIMUM_AGE_SARDINE;
-				nutritionalValue = ModelConstants.NUTRITIONAL_VALUE_SARDINE;
-				this.age = isAgeZero ? 0 : RandomGenerator.getRandom().nextInt(getMaxAge() + 1);
-				break;
-			case SHARK:
-				SPECIES = species;
-				maxAge = ModelConstants.MAXIMUM_AGE_SHARK;
-				this.age = isAgeZero ? 0 : RandomGenerator.getRandom().nextInt(getMaxAge() + 1);
-				break;
-			default:
-				return;
-		}
+		this.alive = true;
+		this.age = isBaby ? 0 : random.nextInt(getMaxAge() + 1);
 	}
 	
+	/**
+	 * 
+	 * @param field
+	 */
 	public void act(Field field) {
 		// Increment age for all creatures
 		incrementAge();
 	}
-        
+    
+	/**
+	 * 
+	 * @param field
+	 * @return
+	 */
     public Creature breed(Field field) {
         Random rand = RandomGenerator.getRandom();
         
         double randomNumber = rand.nextDouble();
-        double birthProb = 0;
-        int ageOfConsent = 0;
-       
-		switch (this.getSpecies()) {
-			case PLANKTON:
-				birthProb = ModelConstants.BREEDING_ODDS_PLANKTON;
-				ageOfConsent = ModelConstants.BREEDING_AGE_PLANKTON;
-				break;
-			case SARDINE:
-				birthProb = ModelConstants.BREEDING_ODDS_SARDINE;
-				ageOfConsent = ModelConstants.BREEDING_AGE_SARDINE;
-				break;
-			case SHARK:
-				birthProb = ModelConstants.BREEDING_ODDS_SHARK;
-				ageOfConsent = ModelConstants.BREEDING_AGE_SHARK;
-				break;
-			default:
-				break;
-		} 
         
-        if((getAge() >= ageOfConsent) && (randomNumber <= birthProb)){
+        if((getAge() >= getBreedingAge()) && (randomNumber <= getBreedingOdds())){
             //System.out.println("BABY: " + "Species: " + this.getSpecies() + " " + randomNumber);
             return giveBirth(field);
         }
+        
 		return null;
     }
 
+    /**
+     * 
+     * @param field
+     * @return
+     */
     private Creature giveBirth(Field field){
         Location babyLocation = null;
         
@@ -106,15 +80,14 @@ abstract public class Creature {
 		setAge(getAge() + 1);
 	}
 	
-	// Getters and Setters
+	abstract public double getBreedingOdds();
 	
-	public int getNutritionalValue() {
-		return nutritionalValue;
-	}
+	abstract public int getMaxAge();
 	
-	public int getMaxAge() {
-		return maxAge;
-	}
+	abstract public double getBreedingAge();
+	
+	abstract public int getNutritionalValue();
+	
 	
 	/**
 	 * @return the age of the Creature
@@ -152,12 +125,19 @@ abstract public class Creature {
 		return SPECIES;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean isAlive() {
-		return isAlive;
+		return alive;
 	}
 
-	public void setIsAlive(boolean isAlive) {
-		this.isAlive = isAlive;
+	/**
+	 * 
+	 */
+	public void setNotAlive() {
+		this.alive = false;
 	}
 	
 }

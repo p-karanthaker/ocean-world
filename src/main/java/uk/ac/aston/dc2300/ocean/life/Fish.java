@@ -54,11 +54,11 @@ abstract public class Fish extends Creature {
 				move(field, getLocation(), newLocation);
 			} else {
 				// If the fish can't move it dies of over-crowding
-	            this.setIsAlive(false);
+	            this.setNotAlive();
 	            field.place(null, getLocation());
 			}
 		} else {
-			this.setIsAlive(false);
+			this.setNotAlive();
 			field.place(null, getLocation());
 		}
 	}
@@ -70,7 +70,7 @@ abstract public class Fish extends Creature {
 	 */
     public void eatFood(Field field, Location foodLocation) {
         Creature creature = field.getObjectAt(foodLocation);
-        creature.setIsAlive(false);
+        creature.setNotAlive();
         
         setFoodLevel(this.getFoodLevel() + creature.getNutritionalValue());
         

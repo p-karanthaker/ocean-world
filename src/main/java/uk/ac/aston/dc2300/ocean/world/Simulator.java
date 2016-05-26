@@ -153,7 +153,7 @@ public class Simulator {
 	        			it.add(baby);
 	        		}
         		} else {
-        			creature.setIsAlive(false);
+        			creature.setNotAlive();
         			field.place(null, creature.getLocation());
         		}
         	} else if (!creature.isAlive()) {
