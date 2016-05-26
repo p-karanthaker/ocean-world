@@ -17,14 +17,44 @@ import uk.ac.aston.dc2300.ocean.life.Sardine;
 import uk.ac.aston.dc2300.ocean.life.Shark;
 import uk.ac.aston.dc2300.ocean.life.Species;
 
+/**
+ * The Simulator application controller.
+ * 
+ * @author Karan Thaker / Orry Edwards
+ *
+ */
 public class Simulator {
 	
+	/**
+	 * The field used for the simulation.
+	 */
 	private Field field;
+	
+	/**
+	 * Displays and updates the field
+	 */
 	private SimulatorView view;
+	
+	/**
+	 * A list to hold all creatures which are alive
+	 */
 	private List<Creature> creatures;
+	
+	/**
+	 * The current simulation step
+	 */
 	private int simulationStep = 0;
+	
+	/**
+	 * Random object used for selection with probabilities and preventing observed behaviour
+	 */
 	private Random random;
 	
+	/**
+	 * Application entry point.
+	 * 
+	 * @param args command line arguments (not used)
+	 */
 	public static void main(String[] args) {
 	    try {
 	        // Set System L&F
@@ -43,11 +73,20 @@ public class Simulator {
 	    catch (IllegalAccessException e) {
 	       // handle exception
 	    }
+	    
+	    
 	    Simulator sim = new Simulator(ModelConstants.OCEAN_DEPTH, ModelConstants.OCEAN_WIDTH);
 	    sim.initialise();
 	    sim.simulate(ModelConstants.SIMULATION_LENGTH);
 	}
 	
+	/**
+	 * Constructor for the Simulator. Initialised various fields,
+	 * sets the colours of the animals, and adds a JMenuBar to the view.
+	 * 
+	 * @param depth the depth of the simulation field
+	 * @param width the width of the simulation field
+	 */
 	public Simulator(int depth, int width) {
 		RandomGenerator.initialiseWithSeed(ModelConstants.RNG_SEED);
 		random = RandomGenerator.getRandom();
@@ -63,26 +102,27 @@ public class Simulator {
 		view.setJMenuBar(MenuView.createMenuBar(view));
 	}
 	
+	/**
+	 * Populates the field with creatures randomly based on their
+	 * creation probability.
+	 */
 	public void populate() {
-        //Holds the value of the species chosen randomly
+        // Holds the value of the species chosen randomly
         Species decicedCreature;
         field.clear();
 
-
-        //Cycle through all locations in the field
+        // Cycle through all locations in the field
         for(int depth = 0; depth < field.getDepth(); depth++) {
-            for(int width = 0; width < field.getWidth(); width++) {
-                
-              //Use a random number generator to decide what creature to create
+            for(int width = 0; width < field.getWidth(); width++) { 
+            	// Use a random number generator to decide what creature to create
                 decicedCreature = creationDecider(random.nextDouble());
 
-                //Create the creature 
+                // Create the creature 
                 Creature newCreature = null;
-
                 newCreature = CreatureFactory.getCreature(decicedCreature, false, new Location(depth, width));
                 
-                //and place in field
-                if(newCreature != null){       
+                // and place in field
+                if(newCreature != null) {       
                     field.place(newCreature, newCreature.getLocation());
                     creatures.add(newCreature);
                 }
@@ -120,6 +160,9 @@ public class Simulator {
     	return Species.EMPTY;
     }
 	
+    /**
+     * Initialises the Simulation for a new usage
+     */
     public void initialise() {
     	simulationStep = 0;
 		creatures.clear();
@@ -144,23 +187,30 @@ public class Simulator {
      * Handles the movement of all the creatures per step in the simulation
      */
     private void simulateOneStep(){
+    	// Shuffle creatures to prevent observed behaviour
         Collections.shuffle(creatures, random);
-        for(ListIterator<Creature> it = creatures.listIterator(); it.hasNext();){
-        	Creature creature = it.next();
+        
+        /*
+         * Use a ListIterator rather than iterating over the list itself so that
+         * we can add and remove objects from it whilst iterating. This prevents
+         * a ConcurentModificationException.
+         */
+        for(ListIterator<Creature> listIterator = creatures.listIterator(); listIterator.hasNext();){
+        	Creature creature = listIterator.next();
         	if (creature.isAlive()) {
         		if (creature.getAge() < creature.getMaxAge()) {
 	        		creature.act(field);
 	        		Creature baby = creature.breed(field);
 	        		if(baby != null) {
-	        			it.add(baby);
+	        			listIterator.add(baby);
 	        		}
         		} else {
         			creature.setNotAlive();
         			field.place(null, creature.getLocation());
         		}
         	} else if (!creature.isAlive()) {
-        		// remove dead creatures for memory efficiency
-        		it.remove();
+        		// Remove dead creatures for memory efficiency
+        		listIterator.remove();
         	}
         }
     }
