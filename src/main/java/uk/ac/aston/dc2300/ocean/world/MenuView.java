@@ -56,12 +56,12 @@ public class MenuView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				parent.dispose();
-				final Simulator sim = Simulator.getInstance();
+				final Simulator sim = new Simulator(ModelConstants.OCEAN_WIDTH, ModelConstants.OCEAN_DEPTH);
 				new Thread() {
 					@Override
 					public void run() {
-						sim.init(ModelConstants.OCEAN_WIDTH, ModelConstants.OCEAN_DEPTH);
-						sim.startSimulation();
+						sim.initialise();
+						sim.simulate(ModelConstants.SIMULATION_LENGTH);
 					}
 				}.start();
 				

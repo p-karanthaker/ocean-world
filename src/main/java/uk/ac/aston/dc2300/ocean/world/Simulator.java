@@ -18,12 +18,12 @@ import uk.ac.aston.dc2300.ocean.life.Shark;
 import uk.ac.aston.dc2300.ocean.life.Species;
 
 public class Simulator {
-
-	private static Simulator instance = null;
 	
-	private static Field field;
-	private static SimulatorView view;
-	private List<Creature> creatures = new ArrayList<Creature>();
+	private Field field;
+	private SimulatorView view;
+	private List<Creature> creatures;
+	private int simulationStep = 0;
+	
 	
 	public static void main(String[] args) {
 	    try {
@@ -43,26 +43,17 @@ public class Simulator {
 	    catch (IllegalAccessException e) {
 	       // handle exception
 	    }
-
-	    Simulator.getInstance().init(ModelConstants.OCEAN_WIDTH, ModelConstants.OCEAN_DEPTH);; //Create and show the GUI.
-		Simulator.getInstance().startSimulation();
+	    Simulator sim = new Simulator(ModelConstants.OCEAN_DEPTH, ModelConstants.OCEAN_WIDTH);
+	    sim.initialise();
+	    sim.simulate(ModelConstants.SIMULATION_LENGTH);
 	}
 	
-	private Simulator() {
+	public Simulator(int depth, int width) {
+		creatures = new ArrayList<Creature>();
 		
-	}
-	
-	public static Simulator getInstance() {
-		if(instance == null) {
-			return new Simulator();
-		}
-		return instance;
-	}
-	
-	public void init(int width, int depth) {
-		field = new Field(ModelConstants.OCEAN_DEPTH, ModelConstants.OCEAN_WIDTH);
-
-		view = new SimulatorView(ModelConstants.OCEAN_DEPTH, ModelConstants.OCEAN_WIDTH);
+		field = new Field(depth, width);
+		view = new SimulatorView(depth, width);
+		
 		view.setColor(Plankton.class, Color.GREEN);
 		view.setColor(Sardine.class, Color.DARK_GRAY);
 		view.setColor(Shark.class, Color.CYAN);
@@ -128,26 +119,22 @@ public class Simulator {
     	return Species.EMPTY;
     }
 	
-    public void startSimulation() {
-    	creatures.clear();
-    	populate();
-        simulate();
+    public void initialise() {
+    	simulationStep = 0;
+		creatures.clear();
+		field.clear();
+		populate();
+		view.showStatus(simulationStep, field);
     }
        
     /**
      * Simulates the ocean field and all activity for the pre-defined number of steps
      */
-    private void simulate() {
-        for(int simStep = 1; simStep <= ModelConstants.SIMULATION_LENGTH; simStep++)
+    public void simulate(int simulationLength) {
+        while(simulationStep <= simulationLength)
         {
             simulateOneStep();
-            view.showStatus(simStep, field);
-            /*try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
+            simulationStep++;
         }
     }
     
@@ -174,5 +161,7 @@ public class Simulator {
         		it.remove();
         	}
         }
+
+        view.showStatus(simulationStep, field);
     }
 }
