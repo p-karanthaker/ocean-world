@@ -23,7 +23,7 @@ public class Simulator {
 	private SimulatorView view;
 	private List<Creature> creatures;
 	private int simulationStep = 0;
-	
+	private Random random;
 	
 	public static void main(String[] args) {
 	    try {
@@ -49,6 +49,9 @@ public class Simulator {
 	}
 	
 	public Simulator(int depth, int width) {
+		RandomGenerator.initialiseWithSeed(ModelConstants.RNG_SEED);
+		random = RandomGenerator.getRandom();
+		
 		creatures = new ArrayList<Creature>();
 		
 		field = new Field(depth, width);
@@ -61,32 +64,30 @@ public class Simulator {
 	}
 	
 	public void populate() {
-            //Holds the value of the specides chosen randomly
-            Species decicedCreature;
-            RandomGenerator.initialiseWithSeed(ModelConstants.RNG_SEED);
-            Random rand = RandomGenerator.getRandom();
-                    field.clear();
+        //Holds the value of the species chosen randomly
+        Species decicedCreature;
+        field.clear();
 
 
-            //Cycle through all locations in the field
-            for(int depth = 0; depth < field.getDepth(); depth++) {
-                for(int width = 0; width < field.getWidth(); width++) {
-                    
-                  //Use a random number generator to decide what creature to create
-                    decicedCreature = creationDecider(rand.nextDouble());
+        //Cycle through all locations in the field
+        for(int depth = 0; depth < field.getDepth(); depth++) {
+            for(int width = 0; width < field.getWidth(); width++) {
+                
+              //Use a random number generator to decide what creature to create
+                decicedCreature = creationDecider(random.nextDouble());
 
-                    //Create the creature 
-                    Creature newCreature = null;
+                //Create the creature 
+                Creature newCreature = null;
 
-                    newCreature = CreatureFactory.getCreature(decicedCreature, false, new Location(depth, width));
-                    
-                    //and place in field
-                    if(newCreature != null){       
-                        field.place(newCreature, newCreature.getLocation());
-                        creatures.add(newCreature);
-                    }
+                newCreature = CreatureFactory.getCreature(decicedCreature, false, new Location(depth, width));
+                
+                //and place in field
+                if(newCreature != null){       
+                    field.place(newCreature, newCreature.getLocation());
+                    creatures.add(newCreature);
                 }
             }
+        }
 	}
         
     /**
@@ -134,6 +135,7 @@ public class Simulator {
         while(simulationStep <= simulationLength && view.isViable(field))
         {
             simulateOneStep();
+            view.showStatus(simulationStep, field);
             simulationStep++;
         }
     }
@@ -142,7 +144,7 @@ public class Simulator {
      * Handles the movement of all the creatures per step in the simulation
      */
     private void simulateOneStep(){
-        Collections.shuffle(creatures);
+        Collections.shuffle(creatures, random);
         for(ListIterator<Creature> it = creatures.listIterator(); it.hasNext();){
         	Creature creature = it.next();
         	if (creature.isAlive()) {
@@ -161,7 +163,5 @@ public class Simulator {
         		it.remove();
         	}
         }
-
-        view.showStatus(simulationStep, field);
     }
 }
