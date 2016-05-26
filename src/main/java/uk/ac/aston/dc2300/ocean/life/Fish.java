@@ -13,8 +13,10 @@ abstract public class Fish extends Creature {
 	public Fish(Species species, boolean isAgeZero, Location initialLocation, Species prey) {
 		super(species, isAgeZero, initialLocation);
 		this.prey = prey;
-		this.foodLevel = 100;
+		this.foodLevel = getPreyNutritionalValue();
 	}
+	
+	abstract public int getPreyNutritionalValue();
 	
 	/**
 	 * @return the foodLevel
@@ -26,8 +28,8 @@ abstract public class Fish extends Creature {
 	/**
 	 * @param foodLevel the foodLevel to set
 	 */
-	public void setFoodLevel(int foodLevel) {
-		this.foodLevel = foodLevel;
+	public void decreaseFoodLevel() {
+		this.foodLevel--;
 	}
 	
 	public Species getPrey() {
@@ -38,7 +40,7 @@ abstract public class Fish extends Creature {
 	public void act(Field field) {
 		// increment age
 		super.act(field);
-		setFoodLevel(getFoodLevel() - 8);
+		decreaseFoodLevel();
 		
 		if (getFoodLevel() > 0) {
 			// Find food, also find a new location.
@@ -72,7 +74,7 @@ abstract public class Fish extends Creature {
         Creature creature = field.getObjectAt(foodLocation);
         creature.setNotAlive();
         
-        setFoodLevel(this.getFoodLevel() + creature.getNutritionalValue());
+        this.foodLevel += creature.getNutritionalValue();
         
         // take the creatures location
         Location oldLocation = getLocation();
