@@ -9,12 +9,29 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+/**
+ * MenuView sets up a JMenuBar with predefine defined items and actions 
+ * which can be added to any JFrame.
+ * 
+ * @author Karan Thaker / Orry Edwards
+ *
+ */
 public class MenuView {
 
+	/**
+	 * Private constructor to prevent instantiation
+	 */
 	private MenuView () {
 		
 	}
 	
+	/**
+	 * Method which creates Menu, Options, and Restart Simulation JMenuItem. 
+	 * Also adds action events to each item.
+	 * 
+	 * @param parent
+	 * @return
+	 */
 	public static JMenuBar createMenuBar(final JFrame parent) {
     	JMenu menu;
         JMenuItem optionsItem;
@@ -56,6 +73,13 @@ public class MenuView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				parent.dispose();
+				
+				/*
+				 * Create a new Simulator object which runs in a new Thread so that
+				 * it is not executed in the Event Dispatch Thread. This prevents 
+				 * the GUI freezing on restart and only showing the final state once
+				 * the simulation has ended.
+				 */
 				final Simulator sim = new Simulator(ModelConstants.OCEAN_WIDTH, ModelConstants.OCEAN_DEPTH);
 				new Thread() {
 					@Override
