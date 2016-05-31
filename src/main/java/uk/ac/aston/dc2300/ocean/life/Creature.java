@@ -2,7 +2,6 @@ package uk.ac.aston.dc2300.ocean.life;
 
 import java.util.Random;
 
-import uk.ac.aston.dc2300.ocean.world.CreatureFactory;
 import uk.ac.aston.dc2300.ocean.world.Field;
 import uk.ac.aston.dc2300.ocean.world.Location;
 import uk.ac.aston.dc2300.ocean.world.RandomGenerator;

@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package uk.ac.aston.dc2300.ocean.world;
+package uk.ac.aston.dc2300.ocean.life;
 
 import uk.ac.aston.dc2300.ocean.life.*;
+import uk.ac.aston.dc2300.ocean.world.Location;
 /**
  *
  * @author OEDWARDS

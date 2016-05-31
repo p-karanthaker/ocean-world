@@ -1,4 +1,4 @@
-package uk.ac.aston.dc2300.ocean.world;
+package uk.ac.aston.dc2300.ocean.gui;
 
 import java.awt.*;
 import javax.swing.*;

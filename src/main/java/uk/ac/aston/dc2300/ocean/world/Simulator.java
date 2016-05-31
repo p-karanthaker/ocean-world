@@ -11,7 +11,10 @@ import java.util.Random;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import uk.ac.aston.dc2300.ocean.gui.MenuView;
+import uk.ac.aston.dc2300.ocean.gui.SimulatorView;
 import uk.ac.aston.dc2300.ocean.life.Creature;
+import uk.ac.aston.dc2300.ocean.life.CreatureFactory;
 import uk.ac.aston.dc2300.ocean.life.Plankton;
 import uk.ac.aston.dc2300.ocean.life.Sardine;
 import uk.ac.aston.dc2300.ocean.life.Shark;

@@ -1,8 +1,13 @@
-package uk.ac.aston.dc2300.ocean.world;
+package uk.ac.aston.dc2300.ocean.gui;
 
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
+
+import uk.ac.aston.dc2300.ocean.world.Field;
+import uk.ac.aston.dc2300.ocean.world.FieldStats;
+
 import java.util.HashMap;
 
 /**

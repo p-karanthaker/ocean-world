@@ -1,4 +1,4 @@
-package uk.ac.aston.dc2300.ocean.world;
+package uk.ac.aston.dc2300.ocean.gui;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+
+import uk.ac.aston.dc2300.ocean.world.ModelConstants;
 
 /**
  * OptionView sets up a JDialog in a GridLayout and displays
