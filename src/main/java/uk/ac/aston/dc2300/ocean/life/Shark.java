@@ -1,6 +1,5 @@
 package uk.ac.aston.dc2300.ocean.life;
 
-import uk.ac.aston.dc2300.ocean.world.Field;
 import uk.ac.aston.dc2300.ocean.world.Location;
 import uk.ac.aston.dc2300.ocean.world.ModelConstants;
 
@@ -17,17 +16,6 @@ public class Shark extends Fish {
 	 */
 	public Shark(boolean isAgeZero, Location initialLocation) {
 		super(Species.SHARK, isAgeZero, initialLocation, Species.SARDINE);
-	}
-
-	/**
-	 * Performs all the actions of the creatures such as swim, eat and breed
-	 * 
-	 * @param field
-	 *            the current 2D array representing the environment
-	 */
-	@Override
-	public void act(Field field) {
-		super.act(field);
 	}
 
 	/**
