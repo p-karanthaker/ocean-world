@@ -5,7 +5,6 @@
  */
 package uk.ac.aston.dc2300.ocean.life;
 
-import uk.ac.aston.dc2300.ocean.life.*;
 import uk.ac.aston.dc2300.ocean.world.Location;
 
 /**
