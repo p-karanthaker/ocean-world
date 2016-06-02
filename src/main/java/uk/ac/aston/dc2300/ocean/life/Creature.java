@@ -14,11 +14,30 @@ import uk.ac.aston.dc2300.ocean.world.RandomGenerator;
  */
 abstract public class Creature {
     
+    	/**
+	 * Random generator to create random numbers
+	 */
 	private Random random = RandomGenerator.getRandom();
+        
+        /**
+	 * holds the age of the creature at each step
+	 */
 	private int age;
+        
+        /**
+	 * Holds the location of the creature at each step
+	 */
 	private Location location;
-	private boolean alive;
-	private Species species;
+	
+        /**
+	 * represents if the creature is dead or alive
+	 */
+        private boolean alive;
+	
+        /**
+	 * Holds the what type of animal the creature is
+	 */
+        private Species species;
 	
         
         /**

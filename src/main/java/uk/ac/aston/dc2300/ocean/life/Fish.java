@@ -7,8 +7,15 @@ import uk.ac.aston.dc2300.ocean.world.Location;
 
 abstract public class Fish extends Creature {
 
+    	/**
+	 * Holds the hunger value of the fish
+	 */
 	private int foodLevel;
-	private Species prey;
+	
+        /**
+	 * Records the type of creature the fish is able to eat
+	 */
+        private Species prey;
 	
         /**
 	 * Provides a species type and information on what this creature eats and 
