@@ -23,8 +23,7 @@ abstract public class CreatureFactory {
 	 * @param initialLocation
 	 *            its first location
 	 */
-	public static Creature getCreature(Species species, boolean isAgeZero,
-			Location initialLocation) {
+	public static Creature getCreature(Species species, boolean isAgeZero, Location initialLocation) {
 		switch (species) {
 		case PLANKTON:
 			return new Plankton(isAgeZero, initialLocation);

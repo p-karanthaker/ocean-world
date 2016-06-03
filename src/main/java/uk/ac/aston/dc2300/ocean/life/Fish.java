@@ -30,8 +30,7 @@ abstract public class Fish extends Creature {
 	 * @param prey
 	 *            the type of creature this creature can eat
 	 */
-	public Fish(Species species, boolean isAgeZero, Location initialLocation,
-			Species prey) {
+	public Fish(Species species, boolean isAgeZero, Location initialLocation, Species prey) {
 		super(species, isAgeZero, initialLocation);
 		this.prey = prey;
 		this.foodLevel = getPreyNutritionalValue();

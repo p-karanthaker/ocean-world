@@ -85,8 +85,7 @@ abstract public class Creature {
 		// If the creature is of breeding age and the random number drawn is
 		// within
 		// breeding boundary, creature the creature
-		if ((getAge() >= getBreedingAge())
-				&& (randomNumber <= getBreedingOdds())) {
+		if ((getAge() >= getBreedingAge()) && (randomNumber <= getBreedingOdds())) {
 			return giveBirth(field);
 		}
 
@@ -110,8 +109,7 @@ abstract public class Creature {
 		// If there is space for the baby make one
 		if (babyLocation != null) {
 			// Create the baby creature using the factory
-			Creature baby = CreatureFactory.getCreature(this.getSpecies(),
-					true, babyLocation);
+			Creature baby = CreatureFactory.getCreature(this.getSpecies(), true, babyLocation);
 
 			// Place it in the ocean
 			field.place(baby, babyLocation);

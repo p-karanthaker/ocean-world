@@ -132,8 +132,7 @@ public class SimulatorView extends JFrame {
 		}
 		stats.countFinished();
 
-		population.setText(POPULATION_PREFIX
-				+ stats.getPopulationDetails(field));
+		population.setText(POPULATION_PREFIX + stats.getPopulationDetails(field));
 		fieldView.repaint();
 	}
 
@@ -176,8 +175,7 @@ public class SimulatorView extends JFrame {
 		 */
 		@Override
 		public Dimension getPreferredSize() {
-			return new Dimension(gridWidth * GRID_VIEW_SCALING_FACTOR,
-					gridHeight * GRID_VIEW_SCALING_FACTOR);
+			return new Dimension(gridWidth * GRID_VIEW_SCALING_FACTOR, gridHeight * GRID_VIEW_SCALING_FACTOR);
 		}
 
 		/**

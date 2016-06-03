@@ -51,15 +51,12 @@ public class MenuView {
 
 		// Options menu item
 		optionsItem = new JMenuItem("Options", KeyEvent.VK_O);
-		optionsItem.getAccessibleContext().setAccessibleDescription(
-				"Configure simulation options.");
+		optionsItem.getAccessibleContext().setAccessibleDescription("Configure simulation options.");
 		menu.add(optionsItem);
 
 		// Restart Simulation menu item
-		restartSimulationItem = new JMenuItem("Restart Simulation",
-				KeyEvent.VK_R);
-		restartSimulationItem.getAccessibleContext().setAccessibleDescription(
-				"Restart the simulation.");
+		restartSimulationItem = new JMenuItem("Restart Simulation", KeyEvent.VK_R);
+		restartSimulationItem.getAccessibleContext().setAccessibleDescription("Restart the simulation.");
 		menu.add(restartSimulationItem);
 
 		optionsItem.addActionListener(new ActionListener() {
@@ -83,8 +80,7 @@ public class MenuView {
 				 * prevents the GUI freezing on restart and only showing the
 				 * final state once the simulation has ended.
 				 */
-				final Simulator sim = new Simulator(ModelConstants.OCEAN_WIDTH,
-						ModelConstants.OCEAN_DEPTH);
+				final Simulator sim = new Simulator(ModelConstants.OCEAN_WIDTH, ModelConstants.OCEAN_DEPTH);
 				new Thread() {
 					@Override
 					public void run() {

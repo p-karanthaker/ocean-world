@@ -74,8 +74,7 @@ public class Simulator {
 			// handle exception
 		}
 
-		Simulator sim = new Simulator(ModelConstants.OCEAN_DEPTH,
-				ModelConstants.OCEAN_WIDTH);
+		Simulator sim = new Simulator(ModelConstants.OCEAN_DEPTH, ModelConstants.OCEAN_WIDTH);
 		sim.initialise();
 		sim.simulate(ModelConstants.SIMULATION_LENGTH);
 	}
@@ -122,8 +121,7 @@ public class Simulator {
 
 				// Create the creature
 				Creature newCreature = null;
-				newCreature = CreatureFactory.getCreature(decicedCreature,
-						false, new Location(depth, width));
+				newCreature = CreatureFactory.getCreature(decicedCreature, false, new Location(depth, width));
 
 				// and place in field
 				if (newCreature != null) {
@@ -137,9 +135,7 @@ public class Simulator {
 	/**
 	 * Using cumulative probability, decide on the type of creature to place in
 	 * the Field. P(A) = 0.1, P(B) = 0.4 Event A occurs if the random number <
-	 * P(A) Event B occurs if the random number
-	 * < P
-	 * (A) + P(B) and so on...
+	 * P(A) Event B occurs if the random number < P (A) + P(B) and so on...
 	 * 
 	 * @param randomNumber
 	 * @return the chosen species of creature
@@ -200,8 +196,7 @@ public class Simulator {
 		 * we can add and remove objects from it whilst iterating. This prevents
 		 * a ConcurentModificationException.
 		 */
-		for (ListIterator<Creature> listIterator = creatures.listIterator(); listIterator
-				.hasNext();) {
+		for (ListIterator<Creature> listIterator = creatures.listIterator(); listIterator.hasNext();) {
 			Creature creature = listIterator.next();
 			if (creature.isAlive()) {
 				if (creature.getAge() < creature.getMaxAge()) {

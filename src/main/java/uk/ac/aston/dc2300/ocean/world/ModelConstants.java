@@ -18,7 +18,7 @@ public class ModelConstants {
 	/**
 	 * The seed used in the Random Generator
 	 */
-	public static int RNG_SEED = 21;
+	public static int RNG_SEED = 44;
 
 	/**
 	 * The width of the simulation field view

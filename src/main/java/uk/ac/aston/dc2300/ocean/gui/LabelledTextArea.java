@@ -43,8 +43,7 @@ public class LabelledTextArea extends JComponent {
 		// this.setBorder(new CompoundBorder(
 		// new EmptyBorder(margin, margin, margin, margin),
 		// new EtchedBorder()));
-		this.textArea.setBorder(new CompoundBorder(new EmptyBorder(0, 0, 0, 0),
-				new EtchedBorder()));
+		this.textArea.setBorder(new CompoundBorder(new EmptyBorder(0, 0, 0, 0), new EtchedBorder()));
 
 	}
 
