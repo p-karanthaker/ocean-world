@@ -65,7 +65,7 @@ public class ModelConstants {
 	/**
 	 * Breeding probability for Sardine.java
 	 */
-	public static double BREEDING_ODDS_SARDINE = 0.5f;
+	public static double BREEDING_ODDS_SARDINE = 0.7f;
 
 	/**
 	 * Maximum age for Sardine.java
@@ -75,12 +75,12 @@ public class ModelConstants {
 	/**
 	 * Breeding age for Sardine.java
 	 */
-	public static int BREEDING_AGE_SARDINE = 12;
+	public static int BREEDING_AGE_SARDINE = 6;
 
 	/**
 	 * Nutritional value for Sardine.java
 	 */
-	public static int NUTRITIONAL_VALUE_SARDINE = 14;
+	public static int NUTRITIONAL_VALUE_SARDINE = 8;
 
 	/**
 	 * Creation probabilities for Shark.java
