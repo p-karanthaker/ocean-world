@@ -75,7 +75,7 @@ public class ModelConstants {
 	/**
 	 * Breeding age for Sardine.java
 	 */
-	public static int BREEDING_AGE_SARDINE = 6;
+	public static int BREEDING_AGE_SARDINE = 12;
 
 	/**
 	 * Nutritional value for Sardine.java
@@ -85,7 +85,7 @@ public class ModelConstants {
 	/**
 	 * Creation probabilities for Shark.java
 	 */
-	public static double CREATION_ODDS_SHARK = 0.05f;
+	public static double CREATION_ODDS_SHARK = 0.06f;
 
 	/**
 	 * Breeding probability for Shark.java
