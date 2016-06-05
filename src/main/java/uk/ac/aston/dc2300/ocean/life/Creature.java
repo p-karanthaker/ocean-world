@@ -78,9 +78,7 @@ abstract public class Creature {
 	 *         creature
 	 */
 	public Creature breed(Field field) {
-		Random rand = RandomGenerator.getRandom();
-
-		double randomNumber = rand.nextDouble();
+		double randomNumber = random.nextDouble();
 
 		// If the creature is of breeding age and the random number drawn is
 		// within
