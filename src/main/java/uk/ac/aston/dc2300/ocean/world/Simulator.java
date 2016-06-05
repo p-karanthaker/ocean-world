@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Random;
 
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -83,11 +81,7 @@ public class Simulator {
 
 		Simulator sim = new Simulator(ModelConstants.OCEAN_DEPTH, ModelConstants.OCEAN_WIDTH);
 		sim.initialise();
-		try {
-			sim.simulate(ModelConstants.SIMULATION_LENGTH);
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), e.getClass().toString(), JOptionPane.ERROR_MESSAGE);
-		}
+		sim.simulate(ModelConstants.SIMULATION_LENGTH);
 	}
 
 	/**
